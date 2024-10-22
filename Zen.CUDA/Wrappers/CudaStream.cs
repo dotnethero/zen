@@ -9,15 +9,15 @@ public sealed unsafe class CudaStream : IDisposable
     public CudaStream()
     {
         cudaStream* stream = null;
-        var error = cudaStreamCreate(&stream);
-        Status.EnsureIsSuccess(error);
+        var status = cudaStreamCreate(&stream);
+        Status.EnsureIsSuccess(status);
         Pointer = stream;
     }
     
     public void Synchronize()
     {
-        var error = cudaStreamSynchronize(Pointer);
-        Status.EnsureIsSuccess(error);
+        var status = cudaStreamSynchronize(Pointer);
+        Status.EnsureIsSuccess(status);
     }
 
     public void BeginCapture()

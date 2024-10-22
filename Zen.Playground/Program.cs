@@ -8,8 +8,6 @@ internal static class Program
 {
     public static void Main()
     {
-        var sw = Stopwatch.StartNew();
-        
         using var host1 = HostArray.Allocate<float>(4096);
         using var host2 = HostArray.Allocate<float>(4096);
         using var dev = DeviceArray.Allocate<float>(4096);
@@ -38,13 +36,24 @@ internal static class Program
         {
             host1[i] = i + 64;
         }
+
+        using var start = new CudaEvent();
+        using var stop = new CudaEvent();
         
+        var sw = Stopwatch.StartNew();
+
+        start.Record(stream);
         instance.Launch(stream);
-        stream.Synchronize();
+        stop.Record(stream);
+        stop.Synchronize();
+        
+        var elapsedHost = sw.Elapsed;
+        var elapsedGraph = CudaEvent.Elapsed(start, stop);
         
         Console.WriteLine(host1[128]);
         Console.WriteLine(host2[128]);
         
-        Console.WriteLine(sw.Elapsed);
+        Console.WriteLine($"Host execution: {elapsedHost}");
+        Console.WriteLine($"Graph execution: {elapsedGraph}");
     }
 }
