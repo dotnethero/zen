@@ -35,41 +35,49 @@ public readonly unsafe struct Shape : IEnumerable<int>
 
     public Shape this[Range range] => new(Extents[range], Strides[range]);
 
-    public int GetOffset(Range[] ranges)
+    public int GetOffset(ReadOnlySpan<Coord> indexes)
     {
         var offset = 0;
-        for (var i = 0; i < ranges.Length; ++i)
+        for (var i = 0; i < indexes.Length; ++i)
         {
-            offset += Strides[i] * ranges[i].Start.GetOffset(Rank);     
+            offset += Strides[i] * indexes[i].Start.GetOffset(Rank);     
         }
         return offset;
     }
 
-    public Shape Slice(Range[] ranges)
+    public Shape Slice(ReadOnlySpan<Coord> coords)
     {
         Span<int> extents = stackalloc int[Rank];
         Span<int> strides = stackalloc int[Rank];
+
+        var rank = 0;
         for (var i = 0; i < Rank; ++i)
         {
-            if (i < ranges.Length)
+            if (i < coords.Length)
             {
-                var range = ranges[i];
+                var coord = coords[i];
+                if (coord.IsIndex)
+                    continue;
+                
                 var total = Extents[i];
-                var start = range.Start.GetOffset(total);
-                var end = range.End.GetOffset(total);
-                extents[i] = end - start;
+                var start = coord.Start.GetOffset(total);
+                var end   = coord.End.GetOffset(total);
+                extents[rank] = end - start;
             }
             else
             {
-                extents[i] = Extents[i];
+                extents[rank] = Extents[i];
             }
 
-            strides[i] = Strides[i];
+            strides[rank] = Strides[i];
+            rank++;
         }
-        return Create(extents, strides);
+        return Create(
+            extents[..rank], 
+            strides[..rank]);
     }
 
-    public Shape Permute(Index[] axis) // TODO: Create permutation type
+    public Shape Permute(ReadOnlySpan<Index> axis) // TODO: Create permutation type
     {
         Span<int> extents = stackalloc int[Rank];
         Span<int> strides = stackalloc int[Rank];

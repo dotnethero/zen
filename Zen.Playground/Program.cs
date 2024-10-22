@@ -21,7 +21,7 @@ internal static class Program
         var a = new Tensor<float>([4, 3, 2], array);
         var b = a.Slice(1.., ..^1); 
         var c = a.Permute(0, ^1, ^2);
-        var d = b.Permute(0, ^1, ^2);
+        var d = a.Slice(1.., .., 1);
 
         Utils.WriteLine(a);
         Utils.WriteLine(b);

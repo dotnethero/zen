@@ -28,7 +28,7 @@ public static class Utils
         {
             for (var i = 0; i < tensor.Shape.Extents[0]; ++i)
             {
-                var view = tensor.View(i);
+                var view = tensor.Slice(i);
                 var text = GetString(view, depth + 1);
                 if (i != 0)
                 {
