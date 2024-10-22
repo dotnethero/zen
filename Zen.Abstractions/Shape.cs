@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace Zen;
 
 [CollectionBuilder(typeof(Shape), nameof(Create))]
-public readonly struct Shape : IEnumerable<int>
+public readonly unsafe struct Shape : IEnumerable<int>
 {
     public static readonly Shape Scalar = [];
 
@@ -33,6 +33,20 @@ public readonly struct Shape : IEnumerable<int>
         Size = Shapes.GetSize(extents);
     }
 
+    public Shape this[Range range] => new(Extents[range], Strides[range]);
+
+    public Shape Permute(Index[] axis) // TODO: Create permutation type
+    {
+        Span<int> extents = stackalloc int[Rank];
+        Span<int> strides = stackalloc int[Rank];
+        for (var i = 0; i < Rank; ++i)
+        {
+            extents[i] = Extents[axis[i]];
+            strides[i] = Strides[axis[i]];
+        }
+        return Create(extents, strides);
+    }
+
     IEnumerator<int> IEnumerable<int>.GetEnumerator() => 
         Extents
             .AsEnumerable()
@@ -42,4 +56,6 @@ public readonly struct Shape : IEnumerable<int>
         Extents
             .AsEnumerable()
             .GetEnumerator();
+    
+    public override string ToString() => $"({string.Join(",", Extents)})";
 }
