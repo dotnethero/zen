@@ -5,9 +5,9 @@ namespace Zen.CUDA;
 
 internal static class Status
 {
-    public static void EnsureIsSuccess(cudaError error)
+    public static void EnsureIsSuccess(cudaStatus status)
     {
-        if (error != cudaError.cudaSuccess)
-            throw new CudaException(error);
+        if (status != cudaStatus.cudaSuccess)
+            throw new CudaException(status);
     }
 }

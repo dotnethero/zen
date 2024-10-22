@@ -20,6 +20,20 @@ public sealed unsafe class CudaStream : IDisposable
         Status.EnsureIsSuccess(error);
     }
 
+    public void BeginCapture()
+    {
+        var status = cudaStreamBeginCapture(Pointer, cudaStreamCaptureMode.cudaStreamCaptureModeThreadLocal);
+        Status.EnsureIsSuccess(status);
+    }
+
+    public CudaGraph EndCapture()
+    {
+        cudaGraph* graph = null;
+        var status = cudaStreamEndCapture(Pointer, &graph);
+        Status.EnsureIsSuccess(status);
+        return new(graph);
+    }
+
     public void Dispose()
     {
         cudaStreamDestroy(Pointer);

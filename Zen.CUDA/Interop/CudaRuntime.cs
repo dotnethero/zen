@@ -11,913 +11,913 @@ internal static unsafe class CudaRuntime
     const string __DllName = "cudart64_12.dll";
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceReset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceReset();
+    public static extern cudaStatus cudaDeviceReset();
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceSynchronize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceSynchronize();
+    public static extern cudaStatus cudaDeviceSynchronize();
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceSetLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceSetLimit(cudaLimit limit, nuint value);
+    public static extern cudaStatus cudaDeviceSetLimit(cudaLimit limit, nuint value);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetLimit(nuint* pValue, cudaLimit limit);
+    public static extern cudaStatus cudaDeviceGetLimit(nuint* pValue, cudaLimit limit);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetTexture1DLinearMaxWidth", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetTexture1DLinearMaxWidth(nuint* maxWidthInElements, cudaChannelFormatDesc* fmtDesc, int device);
+    public static extern cudaStatus cudaDeviceGetTexture1DLinearMaxWidth(nuint* maxWidthInElements, cudaChannelFormatDesc* fmtDesc, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetCacheConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetCacheConfig(cudaFuncCache* pCacheConfig);
+    public static extern cudaStatus cudaDeviceGetCacheConfig(cudaFuncCache* pCacheConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetStreamPriorityRange", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetStreamPriorityRange(int* leastPriority, int* greatestPriority);
+    public static extern cudaStatus cudaDeviceGetStreamPriorityRange(int* leastPriority, int* greatestPriority);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceSetCacheConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceSetCacheConfig(cudaFuncCache cacheConfig);
+    public static extern cudaStatus cudaDeviceSetCacheConfig(cudaFuncCache cacheConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetByPCIBusId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetByPCIBusId(int* device, byte* pciBusId);
+    public static extern cudaStatus cudaDeviceGetByPCIBusId(int* device, byte* pciBusId);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetPCIBusId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetPCIBusId(byte* pciBusId, int len, int device);
+    public static extern cudaStatus cudaDeviceGetPCIBusId(byte* pciBusId, int len, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaIpcGetEventHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaIpcGetEventHandle(cudaIpcEventHandle_st* handle, CUevent_st* @event);
+    public static extern cudaStatus cudaIpcGetEventHandle(cudaIpcEventHandle_st* handle, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaIpcOpenEventHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaIpcOpenEventHandle(CUevent_st** @event, cudaIpcEventHandle_st handle);
+    public static extern cudaStatus cudaIpcOpenEventHandle(CUevent_st** @event, cudaIpcEventHandle_st handle);
 
     [DllImport(__DllName, EntryPoint = "cudaIpcGetMemHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaIpcGetMemHandle(cudaIpcMemHandle_st* handle, void* devPtr);
+    public static extern cudaStatus cudaIpcGetMemHandle(cudaIpcMemHandle_st* handle, void* devPtr);
 
     [DllImport(__DllName, EntryPoint = "cudaIpcOpenMemHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaIpcOpenMemHandle(void** devPtr, cudaIpcMemHandle_st handle, uint flags);
+    public static extern cudaStatus cudaIpcOpenMemHandle(void** devPtr, cudaIpcMemHandle_st handle, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaIpcCloseMemHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaIpcCloseMemHandle(void* devPtr);
+    public static extern cudaStatus cudaIpcCloseMemHandle(void* devPtr);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceFlushGPUDirectRDMAWrites", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceFlushGPUDirectRDMAWrites(cudaFlushGPUDirectRDMAWritesTarget target, cudaFlushGPUDirectRDMAWritesScope scope);
+    public static extern cudaStatus cudaDeviceFlushGPUDirectRDMAWrites(cudaFlushGPUDirectRDMAWritesTarget target, cudaFlushGPUDirectRDMAWritesScope scope);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceRegisterAsyncNotification", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceRegisterAsyncNotification(int device, delegate* unmanaged[Cdecl]<cudaAsyncNotificationInfo*, void*, cudaAsyncCallbackEntry*, void> callbackFunc, void* userData, cudaAsyncCallbackEntry** callback);
+    public static extern cudaStatus cudaDeviceRegisterAsyncNotification(int device, delegate* unmanaged[Cdecl]<cudaAsyncNotificationInfo*, void*, cudaAsyncCallbackEntry*, void> callbackFunc, void* userData, cudaAsyncCallbackEntry** callback);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceUnregisterAsyncNotification", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceUnregisterAsyncNotification(int device, cudaAsyncCallbackEntry* callback);
+    public static extern cudaStatus cudaDeviceUnregisterAsyncNotification(int device, cudaAsyncCallbackEntry* callback);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetSharedMemConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetSharedMemConfig(cudaSharedMemConfig* pConfig);
+    public static extern cudaStatus cudaDeviceGetSharedMemConfig(cudaSharedMemConfig* pConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceSetSharedMemConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceSetSharedMemConfig(cudaSharedMemConfig config);
+    public static extern cudaStatus cudaDeviceSetSharedMemConfig(cudaSharedMemConfig config);
 
     [DllImport(__DllName, EntryPoint = "cudaThreadExit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadExit();
+    public static extern cudaStatus cudaThreadExit();
 
     [DllImport(__DllName, EntryPoint = "cudaThreadSynchronize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadSynchronize();
+    public static extern cudaStatus cudaThreadSynchronize();
 
     [DllImport(__DllName, EntryPoint = "cudaThreadSetLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadSetLimit(cudaLimit limit, nuint value);
+    public static extern cudaStatus cudaThreadSetLimit(cudaLimit limit, nuint value);
 
     [DllImport(__DllName, EntryPoint = "cudaThreadGetLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadGetLimit(nuint* pValue, cudaLimit limit);
+    public static extern cudaStatus cudaThreadGetLimit(nuint* pValue, cudaLimit limit);
 
     [DllImport(__DllName, EntryPoint = "cudaThreadGetCacheConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadGetCacheConfig(cudaFuncCache* pCacheConfig);
+    public static extern cudaStatus cudaThreadGetCacheConfig(cudaFuncCache* pCacheConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaThreadSetCacheConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadSetCacheConfig(cudaFuncCache cacheConfig);
+    public static extern cudaStatus cudaThreadSetCacheConfig(cudaFuncCache cacheConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaGetLastError", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetLastError();
+    public static extern cudaStatus cudaGetLastError();
 
     [DllImport(__DllName, EntryPoint = "cudaPeekAtLastError", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaPeekAtLastError();
+    public static extern cudaStatus cudaPeekAtLastError();
 
     [DllImport(__DllName, EntryPoint = "cudaGetErrorName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern byte* cudaGetErrorName(cudaError error);
+    public static extern byte* cudaGetErrorName(cudaStatus status);
 
     [DllImport(__DllName, EntryPoint = "cudaGetErrorString", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern byte* cudaGetErrorString(cudaError error);
+    public static extern byte* cudaGetErrorString(cudaStatus status);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDeviceCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetDeviceCount(int* count);
+    public static extern cudaStatus cudaGetDeviceCount(int* count);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDeviceProperties_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetDeviceProperties_v2(cudaDeviceProp* prop, int device);
+    public static extern cudaStatus cudaGetDeviceProperties_v2(cudaDeviceProp* prop, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetAttribute(int* value, cudaDeviceAttr attr, int device);
+    public static extern cudaStatus cudaDeviceGetAttribute(int* value, cudaDeviceAttr attr, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetDefaultMemPool", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetDefaultMemPool(CUmemPoolHandle_st** memPool, int device);
+    public static extern cudaStatus cudaDeviceGetDefaultMemPool(CUmemPoolHandle_st** memPool, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceSetMemPool", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceSetMemPool(int device, CUmemPoolHandle_st* memPool);
+    public static extern cudaStatus cudaDeviceSetMemPool(int device, CUmemPoolHandle_st* memPool);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetMemPool", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetMemPool(CUmemPoolHandle_st** memPool, int device);
+    public static extern cudaStatus cudaDeviceGetMemPool(CUmemPoolHandle_st** memPool, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetNvSciSyncAttributes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetNvSciSyncAttributes(void* nvSciSyncAttrList, int device, int flags);
+    public static extern cudaStatus cudaDeviceGetNvSciSyncAttributes(void* nvSciSyncAttrList, int device, int flags);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetP2PAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetP2PAttribute(int* value, cudaDeviceP2PAttr attr, int srcDevice, int dstDevice);
+    public static extern cudaStatus cudaDeviceGetP2PAttribute(int* value, cudaDeviceP2PAttr attr, int srcDevice, int dstDevice);
 
     [DllImport(__DllName, EntryPoint = "cudaChooseDevice", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaChooseDevice(int* device, cudaDeviceProp* prop);
+    public static extern cudaStatus cudaChooseDevice(int* device, cudaDeviceProp* prop);
 
     [DllImport(__DllName, EntryPoint = "cudaInitDevice", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaInitDevice(int device, uint deviceFlags, uint flags);
+    public static extern cudaStatus cudaInitDevice(int device, uint deviceFlags, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaSetDevice", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaSetDevice(int device);
+    public static extern cudaStatus cudaSetDevice(int device);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDevice", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetDevice(int* device);
+    public static extern cudaStatus cudaGetDevice(int* device);
 
     [DllImport(__DllName, EntryPoint = "cudaSetValidDevices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaSetValidDevices(int* device_arr, int len);
+    public static extern cudaStatus cudaSetValidDevices(int* device_arr, int len);
 
     [DllImport(__DllName, EntryPoint = "cudaSetDeviceFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaSetDeviceFlags(uint flags);
+    public static extern cudaStatus cudaSetDeviceFlags(uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDeviceFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetDeviceFlags(uint* flags);
+    public static extern cudaStatus cudaGetDeviceFlags(uint* flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamCreate(cudaStream** pStream);
+    public static extern cudaStatus cudaStreamCreate(cudaStream** pStream);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamCreateWithFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamCreateWithFlags(cudaStream** pStream, uint flags);
+    public static extern cudaStatus cudaStreamCreateWithFlags(cudaStream** pStream, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamCreateWithPriority", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamCreateWithPriority(cudaStream** pStream, uint flags, int priority);
+    public static extern cudaStatus cudaStreamCreateWithPriority(cudaStream** pStream, uint flags, int priority);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetPriority", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetPriority(cudaStream* hStream, int* priority);
+    public static extern cudaStatus cudaStreamGetPriority(cudaStream* hStream, int* priority);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetFlags(cudaStream* hStream, uint* flags);
+    public static extern cudaStatus cudaStreamGetFlags(cudaStream* hStream, uint* flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetId(cudaStream* hStream, ulong* streamId);
+    public static extern cudaStatus cudaStreamGetId(cudaStream* hStream, ulong* streamId);
 
     [DllImport(__DllName, EntryPoint = "cudaCtxResetPersistingL2Cache", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaCtxResetPersistingL2Cache();
+    public static extern cudaStatus cudaCtxResetPersistingL2Cache();
 
     [DllImport(__DllName, EntryPoint = "cudaStreamCopyAttributes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamCopyAttributes(cudaStream* dst, cudaStream* src);
+    public static extern cudaStatus cudaStreamCopyAttributes(cudaStream* dst, cudaStream* src);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetAttribute(cudaStream* hStream, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value_out);
+    public static extern cudaStatus cudaStreamGetAttribute(cudaStream* hStream, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value_out);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamSetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamSetAttribute(cudaStream* hStream, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value);
+    public static extern cudaStatus cudaStreamSetAttribute(cudaStream* hStream, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamDestroy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamDestroy(cudaStream* stream);
+    public static extern cudaStatus cudaStreamDestroy(cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamWaitEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamWaitEvent(cudaStream* stream, CUevent_st* @event, uint flags);
+    public static extern cudaStatus cudaStreamWaitEvent(cudaStream* stream, CUevent_st* @event, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamAddCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamAddCallback(cudaStream* stream, delegate* unmanaged[Cdecl]<cudaStream*, cudaError, void*, void> callback, void* userData, uint flags);
+    public static extern cudaStatus cudaStreamAddCallback(cudaStream* stream, delegate* unmanaged[Cdecl]<cudaStream*, cudaStatus, void*, void> callback, void* userData, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamSynchronize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamSynchronize(cudaStream* stream);
+    public static extern cudaStatus cudaStreamSynchronize(cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamQuery", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamQuery(cudaStream* stream);
+    public static extern cudaStatus cudaStreamQuery(cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamAttachMemAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamAttachMemAsync(cudaStream* stream, void* devPtr, nuint length, uint flags);
+    public static extern cudaStatus cudaStreamAttachMemAsync(cudaStream* stream, void* devPtr, nuint length, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamBeginCapture", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamBeginCapture(cudaStream* stream, cudaStreamCaptureMode mode);
+    public static extern cudaStatus cudaStreamBeginCapture(cudaStream* stream, cudaStreamCaptureMode mode);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamBeginCaptureToGraph", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamBeginCaptureToGraph(cudaStream* stream, cudaGraph* graph, CUgraphNode_st** dependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaStreamCaptureMode mode);
+    public static extern cudaStatus cudaStreamBeginCaptureToGraph(cudaStream* stream, cudaGraph* graph, CUgraphNode_st** dependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaStreamCaptureMode mode);
 
     [DllImport(__DllName, EntryPoint = "cudaThreadExchangeStreamCaptureMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaThreadExchangeStreamCaptureMode(cudaStreamCaptureMode* mode);
+    public static extern cudaStatus cudaThreadExchangeStreamCaptureMode(cudaStreamCaptureMode* mode);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamEndCapture", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamEndCapture(cudaStream* stream, cudaGraph** pGraph);
+    public static extern cudaStatus cudaStreamEndCapture(cudaStream* stream, cudaGraph** pGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamIsCapturing", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamIsCapturing(cudaStream* stream, cudaStreamCaptureStatus* pCaptureStatus);
+    public static extern cudaStatus cudaStreamIsCapturing(cudaStream* stream, cudaStreamCaptureStatus* pCaptureStatus);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetCaptureInfo_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetCaptureInfo_v2(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, cudaGraph** graph_out, CUgraphNode_st*** dependencies_out, nuint* numDependencies_out);
+    public static extern cudaStatus cudaStreamGetCaptureInfo_v2(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, cudaGraph** graph_out, CUgraphNode_st*** dependencies_out, nuint* numDependencies_out);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetCaptureInfo_v3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetCaptureInfo_v3(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, cudaGraph** graph_out, CUgraphNode_st*** dependencies_out, cudaGraphEdgeData_st** edgeData_out, nuint* numDependencies_out);
+    public static extern cudaStatus cudaStreamGetCaptureInfo_v3(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, cudaGraph** graph_out, CUgraphNode_st*** dependencies_out, cudaGraphEdgeData_st** edgeData_out, nuint* numDependencies_out);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamUpdateCaptureDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamUpdateCaptureDependencies(cudaStream* stream, CUgraphNode_st** dependencies, nuint numDependencies, uint flags);
+    public static extern cudaStatus cudaStreamUpdateCaptureDependencies(cudaStream* stream, CUgraphNode_st** dependencies, nuint numDependencies, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamUpdateCaptureDependencies_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamUpdateCaptureDependencies_v2(cudaStream* stream, CUgraphNode_st** dependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, uint flags);
+    public static extern cudaStatus cudaStreamUpdateCaptureDependencies_v2(cudaStream* stream, CUgraphNode_st** dependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaEventCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventCreate(CUevent_st** @event);
+    public static extern cudaStatus cudaEventCreate(CUevent_st** @event);
 
     [DllImport(__DllName, EntryPoint = "cudaEventCreateWithFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventCreateWithFlags(CUevent_st** @event, uint flags);
+    public static extern cudaStatus cudaEventCreateWithFlags(CUevent_st** @event, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaEventRecord", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventRecord(CUevent_st* @event, cudaStream* stream);
+    public static extern cudaStatus cudaEventRecord(CUevent_st* @event, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaEventRecordWithFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventRecordWithFlags(CUevent_st* @event, cudaStream* stream, uint flags);
+    public static extern cudaStatus cudaEventRecordWithFlags(CUevent_st* @event, cudaStream* stream, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaEventQuery", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventQuery(CUevent_st* @event);
+    public static extern cudaStatus cudaEventQuery(CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaEventSynchronize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventSynchronize(CUevent_st* @event);
+    public static extern cudaStatus cudaEventSynchronize(CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaEventDestroy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventDestroy(CUevent_st* @event);
+    public static extern cudaStatus cudaEventDestroy(CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaEventElapsedTime", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaEventElapsedTime(float* ms, CUevent_st* start, CUevent_st* end);
+    public static extern cudaStatus cudaEventElapsedTime(float* ms, CUevent_st* start, CUevent_st* end);
 
     [DllImport(__DllName, EntryPoint = "cudaImportExternalMemory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaImportExternalMemory(CUexternalMemory_st** extMem_out, cudaExternalMemoryHandleDesc* memHandleDesc);
+    public static extern cudaStatus cudaImportExternalMemory(CUexternalMemory_st** extMem_out, cudaExternalMemoryHandleDesc* memHandleDesc);
 
     [DllImport(__DllName, EntryPoint = "cudaExternalMemoryGetMappedBuffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaExternalMemoryGetMappedBuffer(void** devPtr, CUexternalMemory_st* extMem, cudaExternalMemoryBufferDesc* bufferDesc);
+    public static extern cudaStatus cudaExternalMemoryGetMappedBuffer(void** devPtr, CUexternalMemory_st* extMem, cudaExternalMemoryBufferDesc* bufferDesc);
 
     [DllImport(__DllName, EntryPoint = "cudaExternalMemoryGetMappedMipmappedArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaExternalMemoryGetMappedMipmappedArray(cudaMipmappedArray** mipmap, CUexternalMemory_st* extMem, cudaExternalMemoryMipmappedArrayDesc* mipmapDesc);
+    public static extern cudaStatus cudaExternalMemoryGetMappedMipmappedArray(cudaMipmappedArray** mipmap, CUexternalMemory_st* extMem, cudaExternalMemoryMipmappedArrayDesc* mipmapDesc);
 
     [DllImport(__DllName, EntryPoint = "cudaDestroyExternalMemory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDestroyExternalMemory(CUexternalMemory_st* extMem);
+    public static extern cudaStatus cudaDestroyExternalMemory(CUexternalMemory_st* extMem);
 
     [DllImport(__DllName, EntryPoint = "cudaImportExternalSemaphore", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaImportExternalSemaphore(CUexternalSemaphore_st** extSem_out, cudaExternalSemaphoreHandleDesc* semHandleDesc);
+    public static extern cudaStatus cudaImportExternalSemaphore(CUexternalSemaphore_st** extSem_out, cudaExternalSemaphoreHandleDesc* semHandleDesc);
 
     [DllImport(__DllName, EntryPoint = "cudaSignalExternalSemaphoresAsync_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaSignalExternalSemaphoresAsync_v2(CUexternalSemaphore_st** extSemArray, cudaExternalSemaphoreSignalParams* paramsArray, uint numExtSems, cudaStream* stream);
+    public static extern cudaStatus cudaSignalExternalSemaphoresAsync_v2(CUexternalSemaphore_st** extSemArray, cudaExternalSemaphoreSignalParams* paramsArray, uint numExtSems, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaWaitExternalSemaphoresAsync_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaWaitExternalSemaphoresAsync_v2(CUexternalSemaphore_st** extSemArray, cudaExternalSemaphoreWaitParams* paramsArray, uint numExtSems, cudaStream* stream);
+    public static extern cudaStatus cudaWaitExternalSemaphoresAsync_v2(CUexternalSemaphore_st** extSemArray, cudaExternalSemaphoreWaitParams* paramsArray, uint numExtSems, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaDestroyExternalSemaphore", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDestroyExternalSemaphore(CUexternalSemaphore_st* extSem);
+    public static extern cudaStatus cudaDestroyExternalSemaphore(CUexternalSemaphore_st* extSem);
 
     [DllImport(__DllName, EntryPoint = "cudaLaunchKernel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaLaunchKernel(void* func, dim3 gridDim, dim3 blockDim, void** args, nuint sharedMem, cudaStream* stream);
+    public static extern cudaStatus cudaLaunchKernel(void* func, dim3 gridDim, dim3 blockDim, void** args, nuint sharedMem, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaLaunchKernelExC", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaLaunchKernelExC(cudaLaunchConfig_st* config, void* func, void** args);
+    public static extern cudaStatus cudaLaunchKernelExC(cudaLaunchConfig_st* config, void* func, void** args);
 
     [DllImport(__DllName, EntryPoint = "cudaLaunchCooperativeKernel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaLaunchCooperativeKernel(void* func, dim3 gridDim, dim3 blockDim, void** args, nuint sharedMem, cudaStream* stream);
+    public static extern cudaStatus cudaLaunchCooperativeKernel(void* func, dim3 gridDim, dim3 blockDim, void** args, nuint sharedMem, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaLaunchCooperativeKernelMultiDevice", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaLaunchCooperativeKernelMultiDevice(cudaLaunchParams* launchParamsList, uint numDevices, uint flags);
+    public static extern cudaStatus cudaLaunchCooperativeKernelMultiDevice(cudaLaunchParams* launchParamsList, uint numDevices, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaFuncSetCacheConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFuncSetCacheConfig(void* func, cudaFuncCache cacheConfig);
+    public static extern cudaStatus cudaFuncSetCacheConfig(void* func, cudaFuncCache cacheConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaFuncGetAttributes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFuncGetAttributes(cudaFuncAttributes* attr, void* func);
+    public static extern cudaStatus cudaFuncGetAttributes(cudaFuncAttributes* attr, void* func);
 
     [DllImport(__DllName, EntryPoint = "cudaFuncSetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFuncSetAttribute(void* func, cudaFuncAttribute attr, int value);
+    public static extern cudaStatus cudaFuncSetAttribute(void* func, cudaFuncAttribute attr, int value);
 
     [DllImport(__DllName, EntryPoint = "cudaFuncGetName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFuncGetName(byte** name, void* func);
+    public static extern cudaStatus cudaFuncGetName(byte** name, void* func);
 
     [DllImport(__DllName, EntryPoint = "cudaFuncGetParamInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFuncGetParamInfo(void* func, nuint paramIndex, nuint* paramOffset, nuint* paramSize);
+    public static extern cudaStatus cudaFuncGetParamInfo(void* func, nuint paramIndex, nuint* paramOffset, nuint* paramSize);
 
     [DllImport(__DllName, EntryPoint = "cudaSetDoubleForDevice", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaSetDoubleForDevice(double* d);
+    public static extern cudaStatus cudaSetDoubleForDevice(double* d);
 
     [DllImport(__DllName, EntryPoint = "cudaSetDoubleForHost", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaSetDoubleForHost(double* d);
+    public static extern cudaStatus cudaSetDoubleForHost(double* d);
 
     [DllImport(__DllName, EntryPoint = "cudaLaunchHostFunc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaLaunchHostFunc(cudaStream* stream, delegate* unmanaged[Cdecl]<void*, void> fn_, void* userData);
+    public static extern cudaStatus cudaLaunchHostFunc(cudaStream* stream, delegate* unmanaged[Cdecl]<void*, void> fn_, void* userData);
 
     [DllImport(__DllName, EntryPoint = "cudaFuncSetSharedMemConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFuncSetSharedMemConfig(void* func, cudaSharedMemConfig config);
+    public static extern cudaStatus cudaFuncSetSharedMemConfig(void* func, cudaSharedMemConfig config);
 
     [DllImport(__DllName, EntryPoint = "cudaOccupancyMaxActiveBlocksPerMultiprocessor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaOccupancyMaxActiveBlocksPerMultiprocessor(int* numBlocks, void* func, int blockSize, nuint dynamicSMemSize);
+    public static extern cudaStatus cudaOccupancyMaxActiveBlocksPerMultiprocessor(int* numBlocks, void* func, int blockSize, nuint dynamicSMemSize);
 
     [DllImport(__DllName, EntryPoint = "cudaOccupancyAvailableDynamicSMemPerBlock", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaOccupancyAvailableDynamicSMemPerBlock(nuint* dynamicSmemSize, void* func, int numBlocks, int blockSize);
+    public static extern cudaStatus cudaOccupancyAvailableDynamicSMemPerBlock(nuint* dynamicSmemSize, void* func, int numBlocks, int blockSize);
 
     [DllImport(__DllName, EntryPoint = "cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int* numBlocks, void* func, int blockSize, nuint dynamicSMemSize, uint flags);
+    public static extern cudaStatus cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int* numBlocks, void* func, int blockSize, nuint dynamicSMemSize, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaOccupancyMaxPotentialClusterSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaOccupancyMaxPotentialClusterSize(int* clusterSize, void* func, cudaLaunchConfig_st* launchConfig);
+    public static extern cudaStatus cudaOccupancyMaxPotentialClusterSize(int* clusterSize, void* func, cudaLaunchConfig_st* launchConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaOccupancyMaxActiveClusters", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaOccupancyMaxActiveClusters(int* numClusters, void* func, cudaLaunchConfig_st* launchConfig);
+    public static extern cudaStatus cudaOccupancyMaxActiveClusters(int* numClusters, void* func, cudaLaunchConfig_st* launchConfig);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocManaged", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocManaged(void** devPtr, nuint size, uint flags);
+    public static extern cudaStatus cudaMallocManaged(void** devPtr, nuint size, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaMalloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMalloc(void** devPtr, nuint size);
+    public static extern cudaStatus cudaMalloc(void** devPtr, nuint size);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocHost", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocHost(void** ptr, nuint size);
+    public static extern cudaStatus cudaMallocHost(void** ptr, nuint size);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocPitch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocPitch(void** devPtr, nuint* pitch, nuint width, nuint height);
+    public static extern cudaStatus cudaMallocPitch(void** devPtr, nuint* pitch, nuint width, nuint height);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocArray(cudaArray** array, cudaChannelFormatDesc* desc, nuint width, nuint height, uint flags);
+    public static extern cudaStatus cudaMallocArray(cudaArray** array, cudaChannelFormatDesc* desc, nuint width, nuint height, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaFree", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFree(void* devPtr);
+    public static extern cudaStatus cudaFree(void* devPtr);
 
     [DllImport(__DllName, EntryPoint = "cudaFreeHost", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFreeHost(void* ptr);
+    public static extern cudaStatus cudaFreeHost(void* ptr);
 
     [DllImport(__DllName, EntryPoint = "cudaFreeArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFreeArray(cudaArray* array);
+    public static extern cudaStatus cudaFreeArray(cudaArray* array);
 
     [DllImport(__DllName, EntryPoint = "cudaFreeMipmappedArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFreeMipmappedArray(cudaMipmappedArray* mipmappedArray);
+    public static extern cudaStatus cudaFreeMipmappedArray(cudaMipmappedArray* mipmappedArray);
 
     [DllImport(__DllName, EntryPoint = "cudaHostAlloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaHostAlloc(void** pHost, nuint size, uint flags);
+    public static extern cudaStatus cudaHostAlloc(void** pHost, nuint size, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaHostRegister", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaHostRegister(void* ptr, nuint size, uint flags);
+    public static extern cudaStatus cudaHostRegister(void* ptr, nuint size, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaHostUnregister", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaHostUnregister(void* ptr);
+    public static extern cudaStatus cudaHostUnregister(void* ptr);
 
     [DllImport(__DllName, EntryPoint = "cudaHostGetDevicePointer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaHostGetDevicePointer(void** pDevice, void* pHost, uint flags);
+    public static extern cudaStatus cudaHostGetDevicePointer(void** pDevice, void* pHost, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaHostGetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaHostGetFlags(uint* pFlags, void* pHost);
+    public static extern cudaStatus cudaHostGetFlags(uint* pFlags, void* pHost);
 
     [DllImport(__DllName, EntryPoint = "cudaMalloc3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMalloc3D(cudaPitchedPtr* pitchedDevPtr, cudaExtent extent);
+    public static extern cudaStatus cudaMalloc3D(cudaPitchedPtr* pitchedDevPtr, cudaExtent extent);
 
     [DllImport(__DllName, EntryPoint = "cudaMalloc3DArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMalloc3DArray(cudaArray** array, cudaChannelFormatDesc* desc, cudaExtent extent, uint flags);
+    public static extern cudaStatus cudaMalloc3DArray(cudaArray** array, cudaChannelFormatDesc* desc, cudaExtent extent, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocMipmappedArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocMipmappedArray(cudaMipmappedArray** mipmappedArray, cudaChannelFormatDesc* desc, cudaExtent extent, uint numLevels, uint flags);
+    public static extern cudaStatus cudaMallocMipmappedArray(cudaMipmappedArray** mipmappedArray, cudaChannelFormatDesc* desc, cudaExtent extent, uint numLevels, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGetMipmappedArrayLevel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetMipmappedArrayLevel(cudaArray** levelArray, cudaMipmappedArray* mipmappedArray, uint level);
+    public static extern cudaStatus cudaGetMipmappedArrayLevel(cudaArray** levelArray, cudaMipmappedArray* mipmappedArray, uint level);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy3D(cudaMemcpy3DParms* p);
+    public static extern cudaStatus cudaMemcpy3D(cudaMemcpy3DParms* p);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy3DPeer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy3DPeer(cudaMemcpy3DPeerParms* p);
+    public static extern cudaStatus cudaMemcpy3DPeer(cudaMemcpy3DPeerParms* p);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy3DAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy3DAsync(cudaMemcpy3DParms* p, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpy3DAsync(cudaMemcpy3DParms* p, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy3DPeerAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy3DPeerAsync(cudaMemcpy3DPeerParms* p, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpy3DPeerAsync(cudaMemcpy3DPeerParms* p, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemGetInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemGetInfo(nuint* free, nuint* total);
+    public static extern cudaStatus cudaMemGetInfo(nuint* free, nuint* total);
 
     [DllImport(__DllName, EntryPoint = "cudaArrayGetInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaArrayGetInfo(cudaChannelFormatDesc* desc, cudaExtent* extent, uint* flags, cudaArray* array);
+    public static extern cudaStatus cudaArrayGetInfo(cudaChannelFormatDesc* desc, cudaExtent* extent, uint* flags, cudaArray* array);
 
     [DllImport(__DllName, EntryPoint = "cudaArrayGetPlane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaArrayGetPlane(cudaArray** pPlaneArray, cudaArray* hArray, uint planeIdx);
+    public static extern cudaStatus cudaArrayGetPlane(cudaArray** pPlaneArray, cudaArray* hArray, uint planeIdx);
 
     [DllImport(__DllName, EntryPoint = "cudaArrayGetMemoryRequirements", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaArrayGetMemoryRequirements(cudaArrayMemoryRequirements* memoryRequirements, cudaArray* array, int device);
+    public static extern cudaStatus cudaArrayGetMemoryRequirements(cudaArrayMemoryRequirements* memoryRequirements, cudaArray* array, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaMipmappedArrayGetMemoryRequirements", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMipmappedArrayGetMemoryRequirements(cudaArrayMemoryRequirements* memoryRequirements, cudaMipmappedArray* mipmap, int device);
+    public static extern cudaStatus cudaMipmappedArrayGetMemoryRequirements(cudaArrayMemoryRequirements* memoryRequirements, cudaMipmappedArray* mipmap, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaArrayGetSparseProperties", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaArrayGetSparseProperties(cudaArraySparseProperties* sparseProperties, cudaArray* array);
+    public static extern cudaStatus cudaArrayGetSparseProperties(cudaArraySparseProperties* sparseProperties, cudaArray* array);
 
     [DllImport(__DllName, EntryPoint = "cudaMipmappedArrayGetSparseProperties", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMipmappedArrayGetSparseProperties(cudaArraySparseProperties* sparseProperties, cudaMipmappedArray* mipmap);
+    public static extern cudaStatus cudaMipmappedArrayGetSparseProperties(cudaArraySparseProperties* sparseProperties, cudaMipmappedArray* mipmap);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy(void* dst, void* src, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpy(void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyPeer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyPeer(void* dst, int dstDevice, void* src, int srcDevice, nuint count);
+    public static extern cudaStatus cudaMemcpyPeer(void* dst, int dstDevice, void* src, int srcDevice, nuint count);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2D(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpy2D(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2DToArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2DToArray(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpy2DToArray(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2DFromArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2DFromArray(void* dst, nuint dpitch, cudaArray* src, nuint wOffset, nuint hOffset, nuint width, nuint height, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpy2DFromArray(void* dst, nuint dpitch, cudaArray* src, nuint wOffset, nuint hOffset, nuint width, nuint height, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2DArrayToArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2DArrayToArray(cudaArray* dst, nuint wOffsetDst, nuint hOffsetDst, cudaArray* src, nuint wOffsetSrc, nuint hOffsetSrc, nuint width, nuint height, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpy2DArrayToArray(cudaArray* dst, nuint wOffsetDst, nuint hOffsetDst, cudaArray* src, nuint wOffsetSrc, nuint hOffsetSrc, nuint width, nuint height, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyToSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyToSymbol(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpyToSymbol(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyFromSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyFromSymbol(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpyFromSymbol(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyAsync(void* dst, void* src, nuint count, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpyAsync(void* dst, void* src, nuint count, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyPeerAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyPeerAsync(void* dst, int dstDevice, void* src, int srcDevice, nuint count, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpyPeerAsync(void* dst, int dstDevice, void* src, int srcDevice, nuint count, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2DAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2DAsync(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpy2DAsync(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2DToArrayAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2DToArrayAsync(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpy2DToArrayAsync(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpy2DFromArrayAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpy2DFromArrayAsync(void* dst, nuint dpitch, cudaArray* src, nuint wOffset, nuint hOffset, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpy2DFromArrayAsync(void* dst, nuint dpitch, cudaArray* src, nuint wOffset, nuint hOffset, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyToSymbolAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyToSymbolAsync(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpyToSymbolAsync(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyFromSymbolAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyFromSymbolAsync(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpyFromSymbolAsync(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemset(void* devPtr, int value, nuint count);
+    public static extern cudaStatus cudaMemset(void* devPtr, int value, nuint count);
 
     [DllImport(__DllName, EntryPoint = "cudaMemset2D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemset2D(void* devPtr, nuint pitch, int value, nuint width, nuint height);
+    public static extern cudaStatus cudaMemset2D(void* devPtr, nuint pitch, int value, nuint width, nuint height);
 
     [DllImport(__DllName, EntryPoint = "cudaMemset3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemset3D(cudaPitchedPtr pitchedDevPtr, int value, cudaExtent extent);
+    public static extern cudaStatus cudaMemset3D(cudaPitchedPtr pitchedDevPtr, int value, cudaExtent extent);
 
     [DllImport(__DllName, EntryPoint = "cudaMemsetAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemsetAsync(void* devPtr, int value, nuint count, cudaStream* stream);
+    public static extern cudaStatus cudaMemsetAsync(void* devPtr, int value, nuint count, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemset2DAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemset2DAsync(void* devPtr, nuint pitch, int value, nuint width, nuint height, cudaStream* stream);
+    public static extern cudaStatus cudaMemset2DAsync(void* devPtr, nuint pitch, int value, nuint width, nuint height, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemset3DAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemset3DAsync(cudaPitchedPtr pitchedDevPtr, int value, cudaExtent extent, cudaStream* stream);
+    public static extern cudaStatus cudaMemset3DAsync(cudaPitchedPtr pitchedDevPtr, int value, cudaExtent extent, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaGetSymbolAddress", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetSymbolAddress(void** devPtr, void* symbol);
+    public static extern cudaStatus cudaGetSymbolAddress(void** devPtr, void* symbol);
 
     [DllImport(__DllName, EntryPoint = "cudaGetSymbolSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetSymbolSize(nuint* size, void* symbol);
+    public static extern cudaStatus cudaGetSymbolSize(nuint* size, void* symbol);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPrefetchAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPrefetchAsync(void* devPtr, nuint count, int dstDevice, cudaStream* stream);
+    public static extern cudaStatus cudaMemPrefetchAsync(void* devPtr, nuint count, int dstDevice, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPrefetchAsync_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPrefetchAsync_v2(void* devPtr, nuint count, cudaMemLocation location, uint flags, cudaStream* stream);
+    public static extern cudaStatus cudaMemPrefetchAsync_v2(void* devPtr, nuint count, cudaMemLocation location, uint flags, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemAdvise", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemAdvise(void* devPtr, nuint count, cudaMemoryAdvise advice, int device);
+    public static extern cudaStatus cudaMemAdvise(void* devPtr, nuint count, cudaMemoryAdvise advice, int device);
 
     [DllImport(__DllName, EntryPoint = "cudaMemAdvise_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemAdvise_v2(void* devPtr, nuint count, cudaMemoryAdvise advice, cudaMemLocation location);
+    public static extern cudaStatus cudaMemAdvise_v2(void* devPtr, nuint count, cudaMemoryAdvise advice, cudaMemLocation location);
 
     [DllImport(__DllName, EntryPoint = "cudaMemRangeGetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemRangeGetAttribute(void* data, nuint dataSize, cudaMemRangeAttribute attribute, void* devPtr, nuint count);
+    public static extern cudaStatus cudaMemRangeGetAttribute(void* data, nuint dataSize, cudaMemRangeAttribute attribute, void* devPtr, nuint count);
 
     [DllImport(__DllName, EntryPoint = "cudaMemRangeGetAttributes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemRangeGetAttributes(void** data, nuint* dataSizes, cudaMemRangeAttribute* attributes, nuint numAttributes, void* devPtr, nuint count);
+    public static extern cudaStatus cudaMemRangeGetAttributes(void** data, nuint* dataSizes, cudaMemRangeAttribute* attributes, nuint numAttributes, void* devPtr, nuint count);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyToArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyToArray(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpyToArray(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyFromArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyFromArray(void* dst, cudaArray* src, nuint wOffset, nuint hOffset, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpyFromArray(void* dst, cudaArray* src, nuint wOffset, nuint hOffset, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyArrayToArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyArrayToArray(cudaArray* dst, nuint wOffsetDst, nuint hOffsetDst, cudaArray* src, nuint wOffsetSrc, nuint hOffsetSrc, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaMemcpyArrayToArray(cudaArray* dst, nuint wOffsetDst, nuint hOffsetDst, cudaArray* src, nuint wOffsetSrc, nuint hOffsetSrc, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyToArrayAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyToArrayAsync(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint count, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpyToArrayAsync(cudaArray* dst, nuint wOffset, nuint hOffset, void* src, nuint count, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemcpyFromArrayAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemcpyFromArrayAsync(void* dst, cudaArray* src, nuint wOffset, nuint hOffset, nuint count, cudaMemcpyKind kind, cudaStream* stream);
+    public static extern cudaStatus cudaMemcpyFromArrayAsync(void* dst, cudaArray* src, nuint wOffset, nuint hOffset, nuint count, cudaMemcpyKind kind, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocAsync(void** devPtr, nuint size, cudaStream* hStream);
+    public static extern cudaStatus cudaMallocAsync(void** devPtr, nuint size, cudaStream* hStream);
 
     [DllImport(__DllName, EntryPoint = "cudaFreeAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaFreeAsync(void* devPtr, cudaStream* hStream);
+    public static extern cudaStatus cudaFreeAsync(void* devPtr, cudaStream* hStream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolTrimTo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolTrimTo(CUmemPoolHandle_st* memPool, nuint minBytesToKeep);
+    public static extern cudaStatus cudaMemPoolTrimTo(CUmemPoolHandle_st* memPool, nuint minBytesToKeep);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolSetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolSetAttribute(CUmemPoolHandle_st* memPool, cudaMemPoolAttr attr, void* value);
+    public static extern cudaStatus cudaMemPoolSetAttribute(CUmemPoolHandle_st* memPool, cudaMemPoolAttr attr, void* value);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolGetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolGetAttribute(CUmemPoolHandle_st* memPool, cudaMemPoolAttr attr, void* value);
+    public static extern cudaStatus cudaMemPoolGetAttribute(CUmemPoolHandle_st* memPool, cudaMemPoolAttr attr, void* value);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolSetAccess", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolSetAccess(CUmemPoolHandle_st* memPool, cudaMemAccessDesc* descList, nuint count);
+    public static extern cudaStatus cudaMemPoolSetAccess(CUmemPoolHandle_st* memPool, cudaMemAccessDesc* descList, nuint count);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolGetAccess", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolGetAccess(cudaMemAccessFlags* flags, CUmemPoolHandle_st* memPool, cudaMemLocation* location);
+    public static extern cudaStatus cudaMemPoolGetAccess(cudaMemAccessFlags* flags, CUmemPoolHandle_st* memPool, cudaMemLocation* location);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolCreate(CUmemPoolHandle_st** memPool, cudaMemPoolProps* poolProps);
+    public static extern cudaStatus cudaMemPoolCreate(CUmemPoolHandle_st** memPool, cudaMemPoolProps* poolProps);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolDestroy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolDestroy(CUmemPoolHandle_st* memPool);
+    public static extern cudaStatus cudaMemPoolDestroy(CUmemPoolHandle_st* memPool);
 
     [DllImport(__DllName, EntryPoint = "cudaMallocFromPoolAsync", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMallocFromPoolAsync(void** ptr, nuint size, CUmemPoolHandle_st* memPool, cudaStream* stream);
+    public static extern cudaStatus cudaMallocFromPoolAsync(void** ptr, nuint size, CUmemPoolHandle_st* memPool, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolExportToShareableHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolExportToShareableHandle(void* shareableHandle, CUmemPoolHandle_st* memPool, cudaMemAllocationHandleType handleType, uint flags);
+    public static extern cudaStatus cudaMemPoolExportToShareableHandle(void* shareableHandle, CUmemPoolHandle_st* memPool, cudaMemAllocationHandleType handleType, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolImportFromShareableHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolImportFromShareableHandle(CUmemPoolHandle_st** memPool, void* shareableHandle, cudaMemAllocationHandleType handleType, uint flags);
+    public static extern cudaStatus cudaMemPoolImportFromShareableHandle(CUmemPoolHandle_st** memPool, void* shareableHandle, cudaMemAllocationHandleType handleType, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolExportPointer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolExportPointer(cudaMemPoolPtrExportData* exportData, void* ptr);
+    public static extern cudaStatus cudaMemPoolExportPointer(cudaMemPoolPtrExportData* exportData, void* ptr);
 
     [DllImport(__DllName, EntryPoint = "cudaMemPoolImportPointer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaMemPoolImportPointer(void** ptr, CUmemPoolHandle_st* memPool, cudaMemPoolPtrExportData* exportData);
+    public static extern cudaStatus cudaMemPoolImportPointer(void** ptr, CUmemPoolHandle_st* memPool, cudaMemPoolPtrExportData* exportData);
 
     [DllImport(__DllName, EntryPoint = "cudaPointerGetAttributes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaPointerGetAttributes(cudaPointerAttributes* attributes, void* ptr);
+    public static extern cudaStatus cudaPointerGetAttributes(cudaPointerAttributes* attributes, void* ptr);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceCanAccessPeer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceCanAccessPeer(int* canAccessPeer, int device, int peerDevice);
+    public static extern cudaStatus cudaDeviceCanAccessPeer(int* canAccessPeer, int device, int peerDevice);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceEnablePeerAccess", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceEnablePeerAccess(int peerDevice, uint flags);
+    public static extern cudaStatus cudaDeviceEnablePeerAccess(int peerDevice, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceDisablePeerAccess", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceDisablePeerAccess(int peerDevice);
+    public static extern cudaStatus cudaDeviceDisablePeerAccess(int peerDevice);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsUnregisterResource", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsUnregisterResource(cudaGraphicsResource* resource);
+    public static extern cudaStatus cudaGraphicsUnregisterResource(cudaGraphicsResource* resource);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsResourceSetMapFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsResourceSetMapFlags(cudaGraphicsResource* resource, uint flags);
+    public static extern cudaStatus cudaGraphicsResourceSetMapFlags(cudaGraphicsResource* resource, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsMapResources", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsMapResources(int count, cudaGraphicsResource** resources, cudaStream* stream);
+    public static extern cudaStatus cudaGraphicsMapResources(int count, cudaGraphicsResource** resources, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsUnmapResources", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsUnmapResources(int count, cudaGraphicsResource** resources, cudaStream* stream);
+    public static extern cudaStatus cudaGraphicsUnmapResources(int count, cudaGraphicsResource** resources, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsResourceGetMappedPointer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsResourceGetMappedPointer(void** devPtr, nuint* size, cudaGraphicsResource* resource);
+    public static extern cudaStatus cudaGraphicsResourceGetMappedPointer(void** devPtr, nuint* size, cudaGraphicsResource* resource);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsSubResourceGetMappedArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsSubResourceGetMappedArray(cudaArray** array, cudaGraphicsResource* resource, uint arrayIndex, uint mipLevel);
+    public static extern cudaStatus cudaGraphicsSubResourceGetMappedArray(cudaArray** array, cudaGraphicsResource* resource, uint arrayIndex, uint mipLevel);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphicsResourceGetMappedMipmappedArray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphicsResourceGetMappedMipmappedArray(cudaMipmappedArray** mipmappedArray, cudaGraphicsResource* resource);
+    public static extern cudaStatus cudaGraphicsResourceGetMappedMipmappedArray(cudaMipmappedArray** mipmappedArray, cudaGraphicsResource* resource);
 
     [DllImport(__DllName, EntryPoint = "cudaGetChannelDesc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetChannelDesc(cudaChannelFormatDesc* desc, cudaArray* array);
+    public static extern cudaStatus cudaGetChannelDesc(cudaChannelFormatDesc* desc, cudaArray* array);
 
     [DllImport(__DllName, EntryPoint = "cudaCreateChannelDesc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaChannelFormatDesc cudaCreateChannelDesc(int x, int y, int z, int w, cudaChannelFormatKind f);
 
     [DllImport(__DllName, EntryPoint = "cudaCreateTextureObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaCreateTextureObject(ulong* pTexObject, cudaResourceDesc* pResDesc, cudaTextureDesc* pTexDesc, cudaResourceViewDesc* pResViewDesc);
+    public static extern cudaStatus cudaCreateTextureObject(ulong* pTexObject, cudaResourceDesc* pResDesc, cudaTextureDesc* pTexDesc, cudaResourceViewDesc* pResViewDesc);
 
     [DllImport(__DllName, EntryPoint = "cudaDestroyTextureObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDestroyTextureObject(ulong texObject);
+    public static extern cudaStatus cudaDestroyTextureObject(ulong texObject);
 
     [DllImport(__DllName, EntryPoint = "cudaGetTextureObjectResourceDesc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetTextureObjectResourceDesc(cudaResourceDesc* pResDesc, ulong texObject);
+    public static extern cudaStatus cudaGetTextureObjectResourceDesc(cudaResourceDesc* pResDesc, ulong texObject);
 
     [DllImport(__DllName, EntryPoint = "cudaGetTextureObjectTextureDesc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetTextureObjectTextureDesc(cudaTextureDesc* pTexDesc, ulong texObject);
+    public static extern cudaStatus cudaGetTextureObjectTextureDesc(cudaTextureDesc* pTexDesc, ulong texObject);
 
     [DllImport(__DllName, EntryPoint = "cudaGetTextureObjectResourceViewDesc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetTextureObjectResourceViewDesc(cudaResourceViewDesc* pResViewDesc, ulong texObject);
+    public static extern cudaStatus cudaGetTextureObjectResourceViewDesc(cudaResourceViewDesc* pResViewDesc, ulong texObject);
 
     [DllImport(__DllName, EntryPoint = "cudaCreateSurfaceObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaCreateSurfaceObject(ulong* pSurfObject, cudaResourceDesc* pResDesc);
+    public static extern cudaStatus cudaCreateSurfaceObject(ulong* pSurfObject, cudaResourceDesc* pResDesc);
 
     [DllImport(__DllName, EntryPoint = "cudaDestroySurfaceObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDestroySurfaceObject(ulong surfObject);
+    public static extern cudaStatus cudaDestroySurfaceObject(ulong surfObject);
 
     [DllImport(__DllName, EntryPoint = "cudaGetSurfaceObjectResourceDesc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetSurfaceObjectResourceDesc(cudaResourceDesc* pResDesc, ulong surfObject);
+    public static extern cudaStatus cudaGetSurfaceObjectResourceDesc(cudaResourceDesc* pResDesc, ulong surfObject);
 
     [DllImport(__DllName, EntryPoint = "cudaDriverGetVersion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDriverGetVersion(int* driverVersion);
+    public static extern cudaStatus cudaDriverGetVersion(int* driverVersion);
 
     [DllImport(__DllName, EntryPoint = "cudaRuntimeGetVersion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaRuntimeGetVersion(int* runtimeVersion);
+    public static extern cudaStatus cudaRuntimeGetVersion(int* runtimeVersion);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphCreate(cudaGraph** pGraph, uint flags);
+    public static extern cudaStatus cudaGraphCreate(cudaGraph** pGraph, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddKernelNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddKernelNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaKernelNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphAddKernelNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaKernelNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphKernelNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphKernelNodeGetParams(CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphKernelNodeGetParams(CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphKernelNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphKernelNodeSetParams(CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphKernelNodeSetParams(CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphKernelNodeCopyAttributes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphKernelNodeCopyAttributes(CUgraphNode_st* hSrc, CUgraphNode_st* hDst);
+    public static extern cudaStatus cudaGraphKernelNodeCopyAttributes(CUgraphNode_st* hSrc, CUgraphNode_st* hDst);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphKernelNodeGetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphKernelNodeGetAttribute(CUgraphNode_st* hNode, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value_out);
+    public static extern cudaStatus cudaGraphKernelNodeGetAttribute(CUgraphNode_st* hNode, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphKernelNodeSetAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphKernelNodeSetAttribute(CUgraphNode_st* hNode, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value);
+    public static extern cudaStatus cudaGraphKernelNodeSetAttribute(CUgraphNode_st* hNode, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemcpy3DParms* pCopyParams);
+    public static extern cudaStatus cudaGraphAddMemcpyNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemcpy3DParms* pCopyParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNodeToSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNodeToSymbol(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphAddMemcpyNodeToSymbol(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNodeFromSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNodeFromSymbol(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphAddMemcpyNodeFromSymbol(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNode1D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNode1D(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* src, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphAddMemcpyNode1D(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemcpyNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemcpyNodeGetParams(CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
+    public static extern cudaStatus cudaGraphMemcpyNodeGetParams(CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemcpyNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemcpyNodeSetParams(CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
+    public static extern cudaStatus cudaGraphMemcpyNodeSetParams(CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemcpyNodeSetParamsToSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemcpyNodeSetParamsToSymbol(CUgraphNode_st* node, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphMemcpyNodeSetParamsToSymbol(CUgraphNode_st* node, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemcpyNodeSetParamsFromSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemcpyNodeSetParamsFromSymbol(CUgraphNode_st* node, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphMemcpyNodeSetParamsFromSymbol(CUgraphNode_st* node, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemcpyNodeSetParams1D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemcpyNodeSetParams1D(CUgraphNode_st* node, void* dst, void* src, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphMemcpyNodeSetParams1D(CUgraphNode_st* node, void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemsetNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemsetNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemsetParams* pMemsetParams);
+    public static extern cudaStatus cudaGraphAddMemsetNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemsetParams* pMemsetParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemsetNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemsetNodeGetParams(CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
+    public static extern cudaStatus cudaGraphMemsetNodeGetParams(CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemsetNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemsetNodeSetParams(CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
+    public static extern cudaStatus cudaGraphMemsetNodeSetParams(CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddHostNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddHostNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaHostNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphAddHostNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphHostNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphHostNodeGetParams(CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphHostNodeGetParams(CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphHostNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphHostNodeSetParams(CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphHostNodeSetParams(CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddChildGraphNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddChildGraphNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraph* childGraph);
+    public static extern cudaStatus cudaGraphAddChildGraphNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraph* childGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphChildGraphNodeGetGraph", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphChildGraphNodeGetGraph(CUgraphNode_st* node, cudaGraph** pGraph);
+    public static extern cudaStatus cudaGraphChildGraphNodeGetGraph(CUgraphNode_st* node, cudaGraph** pGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddEmptyNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddEmptyNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies);
+    public static extern cudaStatus cudaGraphAddEmptyNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddEventRecordNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddEventRecordNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
+    public static extern cudaStatus cudaGraphAddEventRecordNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphEventRecordNodeGetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphEventRecordNodeGetEvent(CUgraphNode_st* node, CUevent_st** event_out);
+    public static extern cudaStatus cudaGraphEventRecordNodeGetEvent(CUgraphNode_st* node, CUevent_st** event_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphEventRecordNodeSetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphEventRecordNodeSetEvent(CUgraphNode_st* node, CUevent_st* @event);
+    public static extern cudaStatus cudaGraphEventRecordNodeSetEvent(CUgraphNode_st* node, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddEventWaitNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddEventWaitNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
+    public static extern cudaStatus cudaGraphAddEventWaitNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphEventWaitNodeGetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphEventWaitNodeGetEvent(CUgraphNode_st* node, CUevent_st** event_out);
+    public static extern cudaStatus cudaGraphEventWaitNodeGetEvent(CUgraphNode_st* node, CUevent_st** event_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphEventWaitNodeSetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphEventWaitNodeSetEvent(CUgraphNode_st* node, CUevent_st* @event);
+    public static extern cudaStatus cudaGraphEventWaitNodeSetEvent(CUgraphNode_st* node, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddExternalSemaphoresSignalNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddExternalSemaphoresSignalNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreSignalNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphAddExternalSemaphoresSignalNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreSignalNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExternalSemaphoresSignalNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExternalSemaphoresSignalNodeGetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* params_out);
+    public static extern cudaStatus cudaGraphExternalSemaphoresSignalNodeGetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* params_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExternalSemaphoresSignalNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExternalSemaphoresSignalNodeSetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphExternalSemaphoresSignalNodeSetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddExternalSemaphoresWaitNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddExternalSemaphoresWaitNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreWaitNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphAddExternalSemaphoresWaitNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreWaitNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExternalSemaphoresWaitNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExternalSemaphoresWaitNodeGetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* params_out);
+    public static extern cudaStatus cudaGraphExternalSemaphoresWaitNodeGetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* params_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExternalSemaphoresWaitNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExternalSemaphoresWaitNodeSetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphExternalSemaphoresWaitNodeSetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemAllocNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemAllocNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemAllocNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphAddMemAllocNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemAllocNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemAllocNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemAllocNodeGetParams(CUgraphNode_st* node, cudaMemAllocNodeParams* params_out);
+    public static extern cudaStatus cudaGraphMemAllocNodeGetParams(CUgraphNode_st* node, cudaMemAllocNodeParams* params_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemFreeNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemFreeNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dptr);
+    public static extern cudaStatus cudaGraphAddMemFreeNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dptr);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemFreeNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphMemFreeNodeGetParams(CUgraphNode_st* node, void* dptr_out);
+    public static extern cudaStatus cudaGraphMemFreeNodeGetParams(CUgraphNode_st* node, void* dptr_out);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGraphMemTrim", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGraphMemTrim(int device);
+    public static extern cudaStatus cudaDeviceGraphMemTrim(int device);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceGetGraphMemAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceGetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
+    public static extern cudaStatus cudaDeviceGetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
 
     [DllImport(__DllName, EntryPoint = "cudaDeviceSetGraphMemAttribute", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaDeviceSetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
+    public static extern cudaStatus cudaDeviceSetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphClone", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphClone(cudaGraph** pGraphClone, cudaGraph* originalGraph);
+    public static extern cudaStatus cudaGraphClone(cudaGraph** pGraphClone, cudaGraph* originalGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeFindInClone", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeFindInClone(CUgraphNode_st** pNode, CUgraphNode_st* originalNode, cudaGraph* clonedGraph);
+    public static extern cudaStatus cudaGraphNodeFindInClone(CUgraphNode_st** pNode, CUgraphNode_st* originalNode, cudaGraph* clonedGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeGetType(CUgraphNode_st* node, cudaGraphNodeType* pType);
+    public static extern cudaStatus cudaGraphNodeGetType(CUgraphNode_st* node, cudaGraphNodeType* pType);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetNodes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetNodes(cudaGraph* graph, CUgraphNode_st** nodes, nuint* numNodes);
+    public static extern cudaStatus cudaGraphGetNodes(cudaGraph* graph, CUgraphNode_st** nodes, nuint* numNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetRootNodes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetRootNodes(cudaGraph* graph, CUgraphNode_st** pRootNodes, nuint* pNumRootNodes);
+    public static extern cudaStatus cudaGraphGetRootNodes(cudaGraph* graph, CUgraphNode_st** pRootNodes, nuint* pNumRootNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetEdges", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetEdges(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint* numEdges);
+    public static extern cudaStatus cudaGraphGetEdges(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint* numEdges);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetEdges_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetEdges_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint* numEdges);
+    public static extern cudaStatus cudaGraphGetEdges_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint* numEdges);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeGetDependencies(CUgraphNode_st* node, CUgraphNode_st** pDependencies, nuint* pNumDependencies);
+    public static extern cudaStatus cudaGraphNodeGetDependencies(CUgraphNode_st* node, CUgraphNode_st** pDependencies, nuint* pNumDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetDependencies_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeGetDependencies_v2(CUgraphNode_st* node, CUgraphNode_st** pDependencies, cudaGraphEdgeData_st* edgeData, nuint* pNumDependencies);
+    public static extern cudaStatus cudaGraphNodeGetDependencies_v2(CUgraphNode_st* node, CUgraphNode_st** pDependencies, cudaGraphEdgeData_st* edgeData, nuint* pNumDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetDependentNodes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeGetDependentNodes(CUgraphNode_st* node, CUgraphNode_st** pDependentNodes, nuint* pNumDependentNodes);
+    public static extern cudaStatus cudaGraphNodeGetDependentNodes(CUgraphNode_st* node, CUgraphNode_st** pDependentNodes, nuint* pNumDependentNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetDependentNodes_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeGetDependentNodes_v2(CUgraphNode_st* node, CUgraphNode_st** pDependentNodes, cudaGraphEdgeData_st* edgeData, nuint* pNumDependentNodes);
+    public static extern cudaStatus cudaGraphNodeGetDependentNodes_v2(CUgraphNode_st* node, CUgraphNode_st** pDependentNodes, cudaGraphEdgeData_st* edgeData, nuint* pNumDependentNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddDependencies(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
+    public static extern cudaStatus cudaGraphAddDependencies(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddDependencies_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddDependencies_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
+    public static extern cudaStatus cudaGraphAddDependencies_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphRemoveDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphRemoveDependencies(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
+    public static extern cudaStatus cudaGraphRemoveDependencies(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphRemoveDependencies_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphRemoveDependencies_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
+    public static extern cudaStatus cudaGraphRemoveDependencies_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphDestroyNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphDestroyNode(CUgraphNode_st* node);
+    public static extern cudaStatus cudaGraphDestroyNode(CUgraphNode_st* node);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphInstantiate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphInstantiate(CUgraphExec_st** pGraphExec, cudaGraph* graph, ulong flags);
+    public static extern cudaStatus cudaGraphInstantiate(cudaGraphInstance** pGraphExec, cudaGraph* graph, ulong flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphInstantiateWithFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphInstantiateWithFlags(CUgraphExec_st** pGraphExec, cudaGraph* graph, ulong flags);
+    public static extern cudaStatus cudaGraphInstantiateWithFlags(cudaGraphInstance** pGraphExec, cudaGraph* graph, ulong flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphInstantiateWithParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphInstantiateWithParams(CUgraphExec_st** pGraphExec, cudaGraph* graph, cudaGraphInstantiateParams_st* instantiateParams);
+    public static extern cudaStatus cudaGraphInstantiateWithParams(cudaGraphInstance** pGraphExec, cudaGraph* graph, cudaGraphInstantiateParams_st* instantiateParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecGetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecGetFlags(CUgraphExec_st* graphExec, ulong* flags);
+    public static extern cudaStatus cudaGraphExecGetFlags(cudaGraphInstance* graphExec, ulong* flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecKernelNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecKernelNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphExecKernelNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecMemcpyNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecMemcpyNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
+    public static extern cudaStatus cudaGraphExecMemcpyNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecMemcpyNodeSetParamsToSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecMemcpyNodeSetParamsToSymbol(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphExecMemcpyNodeSetParamsToSymbol(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecMemcpyNodeSetParamsFromSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecMemcpyNodeSetParamsFromSymbol(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphExecMemcpyNodeSetParamsFromSymbol(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecMemcpyNodeSetParams1D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecMemcpyNodeSetParams1D(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, void* dst, void* src, nuint count, cudaMemcpyKind kind);
+    public static extern cudaStatus cudaGraphExecMemcpyNodeSetParams1D(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecMemsetNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecMemsetNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
+    public static extern cudaStatus cudaGraphExecMemsetNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecHostNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecHostNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
+    public static extern cudaStatus cudaGraphExecHostNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecChildGraphNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecChildGraphNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaGraph* childGraph);
+    public static extern cudaStatus cudaGraphExecChildGraphNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* node, cudaGraph* childGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecEventRecordNodeSetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecEventRecordNodeSetEvent(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, CUevent_st* @event);
+    public static extern cudaStatus cudaGraphExecEventRecordNodeSetEvent(cudaGraphInstance* hGraphExec, CUgraphNode_st* hNode, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecEventWaitNodeSetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecEventWaitNodeSetEvent(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, CUevent_st* @event);
+    public static extern cudaStatus cudaGraphExecEventWaitNodeSetEvent(cudaGraphInstance* hGraphExec, CUgraphNode_st* hNode, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecExternalSemaphoresSignalNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecExternalSemaphoresSignalNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphExecExternalSemaphoresSignalNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecExternalSemaphoresWaitNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecExternalSemaphoresWaitNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphExecExternalSemaphoresWaitNodeSetParams(cudaGraphInstance* hGraphExec, CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeSetEnabled", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeSetEnabled(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, uint isEnabled);
+    public static extern cudaStatus cudaGraphNodeSetEnabled(cudaGraphInstance* hGraphExec, CUgraphNode_st* hNode, uint isEnabled);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetEnabled", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeGetEnabled(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, uint* isEnabled);
+    public static extern cudaStatus cudaGraphNodeGetEnabled(cudaGraphInstance* hGraphExec, CUgraphNode_st* hNode, uint* isEnabled);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecUpdate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecUpdate(CUgraphExec_st* hGraphExec, cudaGraph* hGraph, cudaGraphExecUpdateResultInfo_st* resultInfo);
+    public static extern cudaStatus cudaGraphExecUpdate(cudaGraphInstance* hGraphExec, cudaGraph* hGraph, cudaGraphExecUpdateResultInfo_st* resultInfo);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphUpload", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphUpload(CUgraphExec_st* graphExec, cudaStream* stream);
+    public static extern cudaStatus cudaGraphUpload(cudaGraphInstance* graphExec, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphLaunch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphLaunch(CUgraphExec_st* graphExec, cudaStream* stream);
+    public static extern cudaStatus cudaGraphLaunch(cudaGraphInstance* graphExec, cudaStream* stream);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecDestroy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecDestroy(CUgraphExec_st* graphExec);
+    public static extern cudaStatus cudaGraphExecDestroy(cudaGraphInstance* graphExec);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphDestroy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphDestroy(cudaGraph* graph);
+    public static extern cudaStatus cudaGraphDestroy(cudaGraph* graph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphDebugDotPrint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphDebugDotPrint(cudaGraph* graph, byte* path, uint flags);
+    public static extern cudaStatus cudaGraphDebugDotPrint(cudaGraph* graph, byte* path, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaUserObjectCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaUserObjectCreate(CUuserObject_st** object_out, void* ptr, delegate* unmanaged[Cdecl]<void*, void> destroy, uint initialRefcount, uint flags);
+    public static extern cudaStatus cudaUserObjectCreate(CUuserObject_st** object_out, void* ptr, delegate* unmanaged[Cdecl]<void*, void> destroy, uint initialRefcount, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaUserObjectRetain", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaUserObjectRetain(CUuserObject_st* @object, uint count);
+    public static extern cudaStatus cudaUserObjectRetain(CUuserObject_st* @object, uint count);
 
     [DllImport(__DllName, EntryPoint = "cudaUserObjectRelease", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaUserObjectRelease(CUuserObject_st* @object, uint count);
+    public static extern cudaStatus cudaUserObjectRelease(CUuserObject_st* @object, uint count);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphRetainUserObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphRetainUserObject(cudaGraph* graph, CUuserObject_st* @object, uint count, uint flags);
+    public static extern cudaStatus cudaGraphRetainUserObject(cudaGraph* graph, CUuserObject_st* @object, uint count, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphReleaseUserObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphReleaseUserObject(cudaGraph* graph, CUuserObject_st* @object, uint count);
+    public static extern cudaStatus cudaGraphReleaseUserObject(cudaGraph* graph, CUuserObject_st* @object, uint count);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraphNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphAddNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddNode_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddNode_v2(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaGraphNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphAddNode_v2(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeSetParams(CUgraphNode_st* node, cudaGraphNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphNodeSetParams(CUgraphNode_st* node, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecNodeSetParams(CUgraphExec_st* graphExec, CUgraphNode_st* node, cudaGraphNodeParams* nodeParams);
+    public static extern cudaStatus cudaGraphExecNodeSetParams(cudaGraphInstance* graphExec, CUgraphNode_st* node, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphConditionalHandleCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphConditionalHandleCreate(ulong* pHandle_out, cudaGraph* graph, uint defaultLaunchValue, uint flags);
+    public static extern cudaStatus cudaGraphConditionalHandleCreate(ulong* pHandle_out, cudaGraph* graph, uint defaultLaunchValue, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDriverEntryPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetDriverEntryPoint(byte* symbol, void** funcPtr, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
+    public static extern cudaStatus cudaGetDriverEntryPoint(byte* symbol, void** funcPtr, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDriverEntryPointByVersion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetDriverEntryPointByVersion(byte* symbol, void** funcPtr, uint cudaVersion, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
+    public static extern cudaStatus cudaGetDriverEntryPointByVersion(byte* symbol, void** funcPtr, uint cudaVersion, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
 
     [DllImport(__DllName, EntryPoint = "cudaGetExportTable", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetExportTable(void** ppExportTable, CUuuid_st* pExportTableId);
+    public static extern cudaStatus cudaGetExportTable(void** ppExportTable, CUuuid_st* pExportTableId);
 
     [DllImport(__DllName, EntryPoint = "cudaGetFuncBySymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetFuncBySymbol(CUfunc_st** functionPtr, void* symbolPtr);
+    public static extern cudaStatus cudaGetFuncBySymbol(CUfunc_st** functionPtr, void* symbolPtr);
 
     [DllImport(__DllName, EntryPoint = "cudaGetKernel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGetKernel(CUkern_st** kernelPtr, void* entryFuncAddr);
+    public static extern cudaStatus cudaGetKernel(CUkern_st** kernelPtr, void* entryFuncAddr);
 
 
 }
@@ -1715,7 +1715,7 @@ public unsafe partial struct cudaGraphEdgeData_st
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct CUgraphExec_st
+public unsafe partial struct cudaGraphInstance
 {
     public fixed byte _unused[1];
 }
@@ -1883,7 +1883,7 @@ public enum libraryPropertyType_t : int
     PATCH_LEVEL = 2,
 }
 
-public enum cudaError : int
+public enum cudaStatus : int
 {
     cudaSuccess = 0,
     cudaErrorInvalidValue = 1,

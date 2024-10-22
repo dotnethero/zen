@@ -17,8 +17,13 @@ internal static class Program
         }
 
         using var stream = new CudaStream();
+        stream.BeginCapture();
         host1.CopyTo(dev, stream);
         dev.CopyTo(host2, stream);
+        
+        using var graph = stream.EndCapture();
+        using var instance = graph.CreateInstance();
+        instance.Launch(stream);
         stream.Synchronize();
         
         Console.WriteLine(host1[128]);
