@@ -28,5 +28,18 @@ internal static class Program
         
         Console.WriteLine(host1[128]);
         Console.WriteLine(host2[128]);
+        
+        // repeat graph execution
+        
+        for (var i = 0; i < 4096; ++i)
+        {
+            host1[i] = i + 64;
+        }
+        
+        instance.Launch(stream);
+        stream.Synchronize();
+        
+        Console.WriteLine(host1[128]);
+        Console.WriteLine(host2[128]);
     }
 }
