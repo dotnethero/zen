@@ -1,4 +1,3 @@
-using System.Reflection;
 using Zen.CUDA.Interop;
 using Zen.CUDA.Wrappers;
 
@@ -49,6 +48,21 @@ public sealed unsafe class HostArray<T> : IDisposable where T : unmanaged
 
     public Span<T> AsSpan() => new(Pointer, Size);
 
+    public void CopyTo(HostArray<T> array, cudaStream* stream = null)
+    {
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyHostToHost, stream);
+    }
+
+    public void CopyTo(DeviceArray<T> array, cudaStream* stream = null)
+    {
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyHostToDevice, stream);
+    }
+    
+    public void Sync()
+    {
+        cudaDeviceSynchronize();
+    }
+    
     public void Dispose()
     {
         cudaFreeHost(Pointer);

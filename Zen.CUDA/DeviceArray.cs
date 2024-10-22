@@ -38,6 +38,16 @@ public sealed unsafe class DeviceArray<T> : IDisposable where T : unmanaged
         Pointer = pointer;
     }
 
+    public void CopyTo(HostArray<T> array, cudaStream* stream = null)
+    {
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyDeviceToHost, stream);
+    }
+
+    public void CopyTo(DeviceArray<T> array, cudaStream* stream = null)
+    {
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyDeviceToDevice, stream);
+    }
+
     public void Dispose()
     {
         cudaFree(Pointer);
