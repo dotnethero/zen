@@ -18,7 +18,7 @@ public sealed class Tensor<T> where T : unmanaged
         return new(shape, Reference + offset);
     }
 
-    public Tensor<T> Permute(params Index[] axis)
+    public Tensor<T> Permute(params Axis[] axis)
     {
         return new(Shape.Permute(axis), Reference);
     }
