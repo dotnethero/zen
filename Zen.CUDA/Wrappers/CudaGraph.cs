@@ -6,15 +6,7 @@ public sealed unsafe class CudaGraph : IDisposable
 {
     internal readonly cudaGraph* Pointer;
 
-    public CudaGraph()
-    {
-        cudaGraph* graph = null;
-        
-        var status = cudaGraphCreate(&graph, 1); // TODO: Add flags enum
-        Status.EnsureIsSuccess(status);
-    }
-    
-    public CudaGraph(cudaGraph* graph)
+    internal CudaGraph(cudaGraph* graph)
     {
         Pointer = graph;
     }

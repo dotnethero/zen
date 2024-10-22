@@ -6,7 +6,7 @@ public sealed unsafe class CudaGraphInstance : IDisposable
 {
     internal readonly cudaGraphInstance* Pointer;
     
-    public CudaGraphInstance(cudaGraphInstance* graphInstance)
+    internal CudaGraphInstance(cudaGraphInstance* graphInstance)
     {
         Pointer = graphInstance;
     }
