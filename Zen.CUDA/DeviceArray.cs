@@ -36,18 +36,13 @@ public static unsafe class DeviceArray
     }
 }
 
-public sealed unsafe class DeviceArray<T> : IDisposable where T : unmanaged
+public sealed unsafe class DeviceArray<T> : TensorRef<T>, IDisposable where T : unmanaged
 {
-    internal readonly T* Pointer;
-
-    public readonly int ElementSize;
     public readonly int Size;
 
-    internal DeviceArray(T* pointer, int size)
+    internal DeviceArray(T* pointer, int size) : base(pointer)
     {
-        ElementSize = sizeof(T);
         Size = size;
-        Pointer = pointer;
     }
 
     public void CopyTo(HostArray<T> array, CudaStream stream)

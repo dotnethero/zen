@@ -18,7 +18,7 @@ internal static class Program
             array[i] = i;
         }
         
-        var a = new HostTensor<float>([4, 3, 2], array);
+        var a = new Tensor<float>([4, 3, 2], array);
         var b = a.Slice(1.., ..^1); 
         var c = a.Permute(0, ^1, ^2);
         var d = b.Permute(0, ^1, ^2);

@@ -5,13 +5,13 @@ namespace Zen.CUDA;
 
 public static class Utils
 {
-    public static void WriteLine<T>(HostTensor<T> tensor, [CallerArgumentExpression(nameof(tensor))] string tensorName = "") where T : unmanaged
+    public static void WriteLine<T>(Tensor<T> tensor, [CallerArgumentExpression(nameof(tensor))] string tensorName = "") where T : unmanaged
     {
         var text = GetString(tensor);
         Console.WriteLine($"{tensorName}{tensor.Shape} =\n{text}");
     }
     
-    private static string GetString<T>(HostTensor<T> tensor, int depth = 0) where T : unmanaged
+    private static string GetString<T>(Tensor<T> tensor, int depth = 0) where T : unmanaged
     {
         var sb = new StringBuilder("[");
 
@@ -20,7 +20,7 @@ public static class Utils
             for (var i = 0; i < tensor.Shape.Extents[0]; ++i)
             {
                 var offset = tensor.Shape.Strides[0] * i;
-                var value = tensor.Array[offset];
+                var value = tensor.Reference[offset];
                 sb.Append($"{value,6:0.00} ");
             }
         }

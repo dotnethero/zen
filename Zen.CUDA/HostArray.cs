@@ -21,7 +21,7 @@ public static unsafe class HostArray
     }
 }
 
-public sealed unsafe class HostArray<T> : HostRef<T>, IDisposable where T : unmanaged
+public sealed unsafe class HostArray<T> : TensorRef<T>, IDisposable where T : unmanaged
 {
     public readonly int Size;
 
