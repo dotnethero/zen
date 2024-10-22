@@ -36,6 +36,7 @@ public sealed unsafe class CudaStream : IDisposable
 
     public void Dispose()
     {
+        cudaStreamSynchronize(Pointer);
         cudaStreamDestroy(Pointer);
     }
 }
