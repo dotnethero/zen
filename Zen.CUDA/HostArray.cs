@@ -41,8 +41,8 @@ public sealed unsafe class HostArray<T> : IDisposable where T : unmanaged
         set => Pointer[offset] = value;
     }
 
-    public static HostArray<T> operator +(HostArray<T> array, int offset) => new(array.Pointer + offset, array.ElementSize);
-    public static HostArray<T> operator -(HostArray<T> array, int offset) => new(array.Pointer - offset, array.ElementSize);
+    public static HostArray<T> operator +(HostArray<T> array, int offset) => new(array.Pointer + offset, 0); // TODO: Create tensor ref
+    public static HostArray<T> operator -(HostArray<T> array, int offset) => new(array.Pointer - offset, 0);
 
     public Span<T> this[Range range] => AsSpan()[range];
 

@@ -28,8 +28,7 @@ public static class Utils
         {
             for (var i = 0; i < tensor.Shape.Extents[0]; ++i)
             {
-                var offset = tensor.Shape.Strides[0] * i;
-                var view = new HostTensor<T>(tensor.Shape[1..], tensor.Array + offset);
+                var view = tensor.View(i);
                 var text = GetString(view, depth + 1);
                 if (i != 0)
                 {

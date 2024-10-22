@@ -35,6 +35,40 @@ public readonly unsafe struct Shape : IEnumerable<int>
 
     public Shape this[Range range] => new(Extents[range], Strides[range]);
 
+    public int GetOffset(Range[] ranges)
+    {
+        var offset = 0;
+        for (var i = 0; i < ranges.Length; ++i)
+        {
+            offset += Strides[i] * ranges[i].Start.GetOffset(Rank);     
+        }
+        return offset;
+    }
+
+    public Shape Slice(Range[] ranges)
+    {
+        Span<int> extents = stackalloc int[Rank];
+        Span<int> strides = stackalloc int[Rank];
+        for (var i = 0; i < Rank; ++i)
+        {
+            if (i < ranges.Length)
+            {
+                var range = ranges[i];
+                var total = Extents[i];
+                var start = range.Start.GetOffset(total);
+                var end = range.End.GetOffset(total);
+                extents[i] = end - start;
+            }
+            else
+            {
+                extents[i] = Extents[i];
+            }
+
+            strides[i] = Strides[i];
+        }
+        return Create(extents, strides);
+    }
+
     public Shape Permute(Index[] axis) // TODO: Create permutation type
     {
         Span<int> extents = stackalloc int[Rank];
