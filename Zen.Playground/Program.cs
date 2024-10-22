@@ -11,18 +11,21 @@ internal static class Program
         GraphExample.Run();
         EventExample.Run();
 
-        using var a = new HostTensor<float>([4, 3, 2]);
+        using var array = HostArray.Allocate<float>(24);
 
-        for (var i = 0; i < a.Array.Size; ++i)
+        for (var i = 0; i < array.Size; ++i)
         {
-            a.Array[i] = i;
+            array[i] = i;
         }
         
+        var a = new HostTensor<float>([4, 3, 2], array);
         var b = a.Slice(1.., ..^1); 
         var c = a.Permute(0, ^1, ^2);
+        var d = b.Permute(0, ^1, ^2);
 
         Utils.WriteLine(a);
         Utils.WriteLine(b);
         Utils.WriteLine(c);
+        Utils.WriteLine(d);
     }
 }

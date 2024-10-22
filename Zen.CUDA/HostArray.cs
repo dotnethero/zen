@@ -21,28 +21,14 @@ public static unsafe class HostArray
     }
 }
 
-public sealed unsafe class HostArray<T> : IDisposable where T : unmanaged
+public sealed unsafe class HostArray<T> : HostRef<T>, IDisposable where T : unmanaged
 {
-    internal readonly T* Pointer;
-
-    public readonly int ElementSize;
     public readonly int Size;
 
-    internal HostArray(T* pointer, int size)
+    internal HostArray(T* pointer, int size) : base(pointer)
     {
-        ElementSize = sizeof(T);
         Size = size;
-        Pointer = pointer;
     }
-
-    public T this[int offset]
-    {
-        get => Pointer[offset];
-        set => Pointer[offset] = value;
-    }
-
-    public static HostArray<T> operator +(HostArray<T> array, int offset) => new(array.Pointer + offset, 0); // TODO: Create tensor ref
-    public static HostArray<T> operator -(HostArray<T> array, int offset) => new(array.Pointer - offset, 0);
 
     public Span<T> this[Range range] => AsSpan()[range];
 

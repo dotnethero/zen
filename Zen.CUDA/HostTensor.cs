@@ -2,7 +2,7 @@
 
 public sealed class HostTensor<T> : IDisposable where T : unmanaged
 {
-    public readonly HostArray<T> Array;
+    public readonly HostRef<T> Array;
     public readonly Shape Shape;
     public readonly bool Owned;
 
@@ -13,7 +13,7 @@ public sealed class HostTensor<T> : IDisposable where T : unmanaged
         Owned = true;
     }
     
-    public HostTensor(Shape shape, HostArray<T> array)
+    public HostTensor(Shape shape, HostRef<T> array)
     {
         Array = array;
         Shape = shape;
@@ -41,7 +41,8 @@ public sealed class HostTensor<T> : IDisposable where T : unmanaged
     
     public void Dispose()
     {
-        if (Owned)
-            Array.Dispose();
+        if (Owned && 
+            Array is HostArray<T> array)
+            array.Dispose();
     }
 }
