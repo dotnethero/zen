@@ -9,27 +9,24 @@ public static unsafe class HostArray
     {
         var bytes = (uint)(size * sizeof(T));
         var pointer = (T*)AllocateSpan(bytes);
-        var array = new HostArray<T>(pointer, size);
-        return array;
+        return new(pointer, size);
     }
     
     private static void* AllocateSpan(uint bytes)
     {
         void* pointer;
-        
         var error = cudaMallocHost(&pointer, bytes);
-        if (error is cudaError.cudaSuccess) 
-            return pointer;
-        
-        throw new CudaException(error);
+        Status.EnsureIsSuccess(error);
+        return pointer;
     }
 }
 
 public sealed unsafe class HostArray<T> : IDisposable where T : unmanaged
 {
+    internal readonly T* Pointer;
+
     public readonly int ElementSize;
     public readonly int Size;
-    public readonly T* Pointer;
 
     internal HostArray(T* pointer, int size)
     {
@@ -48,19 +45,14 @@ public sealed unsafe class HostArray<T> : IDisposable where T : unmanaged
 
     public Span<T> AsSpan() => new(Pointer, Size);
 
-    public void CopyTo(HostArray<T> array, cudaStream* stream = null)
+    public void CopyTo(HostArray<T> array, CudaStream stream)
     {
-        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyHostToHost, stream);
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyHostToHost, stream.Pointer);
     }
 
-    public void CopyTo(DeviceArray<T> array, cudaStream* stream = null)
+    public void CopyTo(DeviceArray<T> array, CudaStream stream)
     {
-        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyHostToDevice, stream);
-    }
-    
-    public void Sync()
-    {
-        cudaDeviceSynchronize();
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyHostToDevice, stream.Pointer);
     }
     
     public void Dispose()

@@ -5,31 +5,43 @@ namespace Zen.CUDA;
 
 public static unsafe class DeviceArray
 {
-    public static DeviceArray<T> Allocate<T>(int size, cudaStream* stream = null) where T : unmanaged
+    public static DeviceArray<T> Allocate<T>(int size) where T : unmanaged
     {
         var bytes = (uint)(size * sizeof(T));
-        var pointer = (T*)AllocateSpan(bytes, stream);
-        var array = new DeviceArray<T>(pointer, size);
-        return array;
+        var pointer = (T*)AllocateSpan(bytes);
+        return new(pointer, size);
+    }
+
+    public static DeviceArray<T> AllocateAsync<T>(int size, CudaStream stream) where T : unmanaged
+    {
+        var bytes = (uint)(size * sizeof(T));
+        var pointer = (T*)AllocateSpanAsync(bytes, stream.Pointer);
+        return new(pointer, size);
     }
     
-    private static void* AllocateSpan(uint bytes, cudaStream* stream)
+    private static void* AllocateSpan(uint bytes)
     {
         void* pointer;
-        
+        var error = cudaMalloc(&pointer, bytes);
+        Status.EnsureIsSuccess(error);
+        return pointer;
+    }
+    
+    private static void* AllocateSpanAsync(uint bytes, cudaStream* stream)
+    {
+        void* pointer;
         var error = cudaMallocAsync(&pointer, bytes, stream);
-        if (error is cudaError.cudaSuccess) 
-            return pointer;
-        
-        throw new CudaException(error);
+        Status.EnsureIsSuccess(error);
+        return pointer;
     }
 }
 
 public sealed unsafe class DeviceArray<T> : IDisposable where T : unmanaged
 {
+    internal readonly T* Pointer;
+
     public readonly int ElementSize;
     public readonly int Size;
-    public readonly T* Pointer;
 
     internal DeviceArray(T* pointer, int size)
     {
@@ -38,14 +50,14 @@ public sealed unsafe class DeviceArray<T> : IDisposable where T : unmanaged
         Pointer = pointer;
     }
 
-    public void CopyTo(HostArray<T> array, cudaStream* stream = null)
+    public void CopyTo(HostArray<T> array, CudaStream stream)
     {
-        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyDeviceToHost, stream);
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyDeviceToHost, stream.Pointer);
     }
 
-    public void CopyTo(DeviceArray<T> array, cudaStream* stream = null)
+    public void CopyTo(DeviceArray<T> array, CudaStream stream)
     {
-        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyDeviceToDevice, stream);
+        cudaMemcpyAsync(array.Pointer, Pointer, (nuint)(Size * ElementSize), cudaMemcpyKind.cudaMemcpyDeviceToDevice, stream.Pointer);
     }
 
     public void Dispose()
