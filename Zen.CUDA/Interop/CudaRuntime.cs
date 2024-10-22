@@ -197,22 +197,22 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaStreamBeginCapture(cudaStream* stream, cudaStreamCaptureMode mode);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamBeginCaptureToGraph", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamBeginCaptureToGraph(cudaStream* stream, CUgraph_st* graph, CUgraphNode_st** dependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaStreamCaptureMode mode);
+    public static extern cudaError cudaStreamBeginCaptureToGraph(cudaStream* stream, cudaGraph* graph, CUgraphNode_st** dependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaStreamCaptureMode mode);
 
     [DllImport(__DllName, EntryPoint = "cudaThreadExchangeStreamCaptureMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaThreadExchangeStreamCaptureMode(cudaStreamCaptureMode* mode);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamEndCapture", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamEndCapture(cudaStream* stream, CUgraph_st** pGraph);
+    public static extern cudaError cudaStreamEndCapture(cudaStream* stream, cudaGraph** pGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamIsCapturing", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaStreamIsCapturing(cudaStream* stream, cudaStreamCaptureStatus* pCaptureStatus);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetCaptureInfo_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetCaptureInfo_v2(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, CUgraph_st** graph_out, CUgraphNode_st*** dependencies_out, nuint* numDependencies_out);
+    public static extern cudaError cudaStreamGetCaptureInfo_v2(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, cudaGraph** graph_out, CUgraphNode_st*** dependencies_out, nuint* numDependencies_out);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamGetCaptureInfo_v3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaStreamGetCaptureInfo_v3(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, CUgraph_st** graph_out, CUgraphNode_st*** dependencies_out, cudaGraphEdgeData_st** edgeData_out, nuint* numDependencies_out);
+    public static extern cudaError cudaStreamGetCaptureInfo_v3(cudaStream* stream, cudaStreamCaptureStatus* captureStatus_out, ulong* id_out, cudaGraph** graph_out, CUgraphNode_st*** dependencies_out, cudaGraphEdgeData_st** edgeData_out, nuint* numDependencies_out);
 
     [DllImport(__DllName, EntryPoint = "cudaStreamUpdateCaptureDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaStreamUpdateCaptureDependencies(cudaStream* stream, CUgraphNode_st** dependencies, nuint numDependencies, uint flags);
@@ -623,10 +623,10 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaRuntimeGetVersion(int* runtimeVersion);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphCreate(CUgraph_st** pGraph, uint flags);
+    public static extern cudaError cudaGraphCreate(cudaGraph** pGraph, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddKernelNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddKernelNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaKernelNodeParams* pNodeParams);
+    public static extern cudaError cudaGraphAddKernelNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaKernelNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphKernelNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphKernelNodeGetParams(CUgraphNode_st* node, cudaKernelNodeParams* pNodeParams);
@@ -644,16 +644,16 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphKernelNodeSetAttribute(CUgraphNode_st* hNode, cudaLaunchAttributeID attr, cudaLaunchAttributeValue* value);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemcpy3DParms* pCopyParams);
+    public static extern cudaError cudaGraphAddMemcpyNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemcpy3DParms* pCopyParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNodeToSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNodeToSymbol(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaError cudaGraphAddMemcpyNodeToSymbol(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNodeFromSymbol", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNodeFromSymbol(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
+    public static extern cudaError cudaGraphAddMemcpyNodeFromSymbol(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemcpyNode1D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemcpyNode1D(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* src, nuint count, cudaMemcpyKind kind);
+    public static extern cudaError cudaGraphAddMemcpyNode1D(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemcpyNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphMemcpyNodeGetParams(CUgraphNode_st* node, cudaMemcpy3DParms* pNodeParams);
@@ -671,7 +671,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphMemcpyNodeSetParams1D(CUgraphNode_st* node, void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemsetNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemsetNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemsetParams* pMemsetParams);
+    public static extern cudaError cudaGraphAddMemsetNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemsetParams* pMemsetParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemsetNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphMemsetNodeGetParams(CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
@@ -680,7 +680,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphMemsetNodeSetParams(CUgraphNode_st* node, cudaMemsetParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddHostNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddHostNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaHostNodeParams* pNodeParams);
+    public static extern cudaError cudaGraphAddHostNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphHostNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphHostNodeGetParams(CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
@@ -689,16 +689,16 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphHostNodeSetParams(CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddChildGraphNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddChildGraphNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUgraph_st* childGraph);
+    public static extern cudaError cudaGraphAddChildGraphNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraph* childGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphChildGraphNodeGetGraph", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphChildGraphNodeGetGraph(CUgraphNode_st* node, CUgraph_st** pGraph);
+    public static extern cudaError cudaGraphChildGraphNodeGetGraph(CUgraphNode_st* node, cudaGraph** pGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddEmptyNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddEmptyNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies);
+    public static extern cudaError cudaGraphAddEmptyNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddEventRecordNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddEventRecordNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
+    public static extern cudaError cudaGraphAddEventRecordNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphEventRecordNodeGetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphEventRecordNodeGetEvent(CUgraphNode_st* node, CUevent_st** event_out);
@@ -707,7 +707,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphEventRecordNodeSetEvent(CUgraphNode_st* node, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddEventWaitNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddEventWaitNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
+    public static extern cudaError cudaGraphAddEventWaitNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphEventWaitNodeGetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphEventWaitNodeGetEvent(CUgraphNode_st* node, CUevent_st** event_out);
@@ -716,7 +716,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphEventWaitNodeSetEvent(CUgraphNode_st* node, CUevent_st* @event);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddExternalSemaphoresSignalNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddExternalSemaphoresSignalNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreSignalNodeParams* nodeParams);
+    public static extern cudaError cudaGraphAddExternalSemaphoresSignalNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreSignalNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExternalSemaphoresSignalNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphExternalSemaphoresSignalNodeGetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* params_out);
@@ -725,7 +725,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphExternalSemaphoresSignalNodeSetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreSignalNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddExternalSemaphoresWaitNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddExternalSemaphoresWaitNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreWaitNodeParams* nodeParams);
+    public static extern cudaError cudaGraphAddExternalSemaphoresWaitNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaExternalSemaphoreWaitNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExternalSemaphoresWaitNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphExternalSemaphoresWaitNodeGetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* params_out);
@@ -734,13 +734,13 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphExternalSemaphoresWaitNodeSetParams(CUgraphNode_st* hNode, cudaExternalSemaphoreWaitNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemAllocNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemAllocNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemAllocNodeParams* nodeParams);
+    public static extern cudaError cudaGraphAddMemAllocNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaMemAllocNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemAllocNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphMemAllocNodeGetParams(CUgraphNode_st* node, cudaMemAllocNodeParams* params_out);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddMemFreeNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddMemFreeNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dptr);
+    public static extern cudaError cudaGraphAddMemFreeNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, void* dptr);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphMemFreeNodeGetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphMemFreeNodeGetParams(CUgraphNode_st* node, void* dptr_out);
@@ -755,25 +755,25 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaDeviceSetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphClone", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphClone(CUgraph_st** pGraphClone, CUgraph_st* originalGraph);
+    public static extern cudaError cudaGraphClone(cudaGraph** pGraphClone, cudaGraph* originalGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeFindInClone", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphNodeFindInClone(CUgraphNode_st** pNode, CUgraphNode_st* originalNode, CUgraph_st* clonedGraph);
+    public static extern cudaError cudaGraphNodeFindInClone(CUgraphNode_st** pNode, CUgraphNode_st* originalNode, cudaGraph* clonedGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphNodeGetType(CUgraphNode_st* node, cudaGraphNodeType* pType);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetNodes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetNodes(CUgraph_st* graph, CUgraphNode_st** nodes, nuint* numNodes);
+    public static extern cudaError cudaGraphGetNodes(cudaGraph* graph, CUgraphNode_st** nodes, nuint* numNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetRootNodes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetRootNodes(CUgraph_st* graph, CUgraphNode_st** pRootNodes, nuint* pNumRootNodes);
+    public static extern cudaError cudaGraphGetRootNodes(cudaGraph* graph, CUgraphNode_st** pRootNodes, nuint* pNumRootNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetEdges", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetEdges(CUgraph_st* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint* numEdges);
+    public static extern cudaError cudaGraphGetEdges(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint* numEdges);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphGetEdges_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphGetEdges_v2(CUgraph_st* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint* numEdges);
+    public static extern cudaError cudaGraphGetEdges_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint* numEdges);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeGetDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphNodeGetDependencies(CUgraphNode_st* node, CUgraphNode_st** pDependencies, nuint* pNumDependencies);
@@ -788,28 +788,28 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphNodeGetDependentNodes_v2(CUgraphNode_st* node, CUgraphNode_st** pDependentNodes, cudaGraphEdgeData_st* edgeData, nuint* pNumDependentNodes);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddDependencies(CUgraph_st* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
+    public static extern cudaError cudaGraphAddDependencies(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddDependencies_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddDependencies_v2(CUgraph_st* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
+    public static extern cudaError cudaGraphAddDependencies_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphRemoveDependencies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphRemoveDependencies(CUgraph_st* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
+    public static extern cudaError cudaGraphRemoveDependencies(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphRemoveDependencies_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphRemoveDependencies_v2(CUgraph_st* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
+    public static extern cudaError cudaGraphRemoveDependencies_v2(cudaGraph* graph, CUgraphNode_st** from, CUgraphNode_st** to, cudaGraphEdgeData_st* edgeData, nuint numDependencies);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphDestroyNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphDestroyNode(CUgraphNode_st* node);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphInstantiate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphInstantiate(CUgraphExec_st** pGraphExec, CUgraph_st* graph, ulong flags);
+    public static extern cudaError cudaGraphInstantiate(CUgraphExec_st** pGraphExec, cudaGraph* graph, ulong flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphInstantiateWithFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphInstantiateWithFlags(CUgraphExec_st** pGraphExec, CUgraph_st* graph, ulong flags);
+    public static extern cudaError cudaGraphInstantiateWithFlags(CUgraphExec_st** pGraphExec, cudaGraph* graph, ulong flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphInstantiateWithParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphInstantiateWithParams(CUgraphExec_st** pGraphExec, CUgraph_st* graph, cudaGraphInstantiateParams_st* instantiateParams);
+    public static extern cudaError cudaGraphInstantiateWithParams(CUgraphExec_st** pGraphExec, cudaGraph* graph, cudaGraphInstantiateParams_st* instantiateParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecGetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphExecGetFlags(CUgraphExec_st* graphExec, ulong* flags);
@@ -836,7 +836,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphExecHostNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaHostNodeParams* pNodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecChildGraphNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecChildGraphNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, CUgraph_st* childGraph);
+    public static extern cudaError cudaGraphExecChildGraphNodeSetParams(CUgraphExec_st* hGraphExec, CUgraphNode_st* node, cudaGraph* childGraph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecEventRecordNodeSetEvent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphExecEventRecordNodeSetEvent(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, CUevent_st* @event);
@@ -857,7 +857,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphNodeGetEnabled(CUgraphExec_st* hGraphExec, CUgraphNode_st* hNode, uint* isEnabled);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphExecUpdate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphExecUpdate(CUgraphExec_st* hGraphExec, CUgraph_st* hGraph, cudaGraphExecUpdateResultInfo_st* resultInfo);
+    public static extern cudaError cudaGraphExecUpdate(CUgraphExec_st* hGraphExec, cudaGraph* hGraph, cudaGraphExecUpdateResultInfo_st* resultInfo);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphUpload", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphUpload(CUgraphExec_st* graphExec, cudaStream* stream);
@@ -869,10 +869,10 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphExecDestroy(CUgraphExec_st* graphExec);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphDestroy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphDestroy(CUgraph_st* graph);
+    public static extern cudaError cudaGraphDestroy(cudaGraph* graph);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphDebugDotPrint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphDebugDotPrint(CUgraph_st* graph, byte* path, uint flags);
+    public static extern cudaError cudaGraphDebugDotPrint(cudaGraph* graph, byte* path, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaUserObjectCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaUserObjectCreate(CUuserObject_st** object_out, void* ptr, delegate* unmanaged[Cdecl]<void*, void> destroy, uint initialRefcount, uint flags);
@@ -884,16 +884,16 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaUserObjectRelease(CUuserObject_st* @object, uint count);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphRetainUserObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphRetainUserObject(CUgraph_st* graph, CUuserObject_st* @object, uint count, uint flags);
+    public static extern cudaError cudaGraphRetainUserObject(cudaGraph* graph, CUuserObject_st* @object, uint count, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphReleaseUserObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphReleaseUserObject(CUgraph_st* graph, CUuserObject_st* @object, uint count);
+    public static extern cudaError cudaGraphReleaseUserObject(cudaGraph* graph, CUuserObject_st* @object, uint count);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddNode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddNode(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraphNodeParams* nodeParams);
+    public static extern cudaError cudaGraphAddNode(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, nuint numDependencies, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphAddNode_v2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphAddNode_v2(CUgraphNode_st** pGraphNode, CUgraph_st* graph, CUgraphNode_st** pDependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaGraphNodeParams* nodeParams);
+    public static extern cudaError cudaGraphAddNode_v2(CUgraphNode_st** pGraphNode, cudaGraph* graph, CUgraphNode_st** pDependencies, cudaGraphEdgeData_st* dependencyData, nuint numDependencies, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphNodeSetParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGraphNodeSetParams(CUgraphNode_st* node, cudaGraphNodeParams* nodeParams);
@@ -902,7 +902,7 @@ internal static unsafe class CudaRuntime
     public static extern cudaError cudaGraphExecNodeSetParams(CUgraphExec_st* graphExec, CUgraphNode_st* node, cudaGraphNodeParams* nodeParams);
 
     [DllImport(__DllName, EntryPoint = "cudaGraphConditionalHandleCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-    public static extern cudaError cudaGraphConditionalHandleCreate(ulong* pHandle_out, CUgraph_st* graph, uint defaultLaunchValue, uint flags);
+    public static extern cudaError cudaGraphConditionalHandleCreate(ulong* pHandle_out, cudaGraph* graph, uint defaultLaunchValue, uint flags);
 
     [DllImport(__DllName, EntryPoint = "cudaGetDriverEntryPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern cudaError cudaGetDriverEntryPoint(byte* symbol, void** funcPtr, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
@@ -1538,7 +1538,7 @@ public unsafe partial struct CUexternalSemaphore_st
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe partial struct CUgraph_st
+public unsafe partial struct cudaGraph
 {
     public fixed byte _unused[1];
 }
@@ -1644,13 +1644,13 @@ public unsafe partial struct cudaConditionalNodeParams
     public ulong handle;
     public cudaGraphConditionalNodeType type_;
     public uint size;
-    public CUgraph_st** phGraph_out;
+    public cudaGraph** phGraph_out;
 }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe partial struct cudaChildGraphNodeParams
 {
-    public CUgraph_st* graph;
+    public cudaGraph* graph;
 }
 
 [StructLayout(LayoutKind.Sequential)]

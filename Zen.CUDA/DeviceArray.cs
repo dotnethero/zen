@@ -1,4 +1,5 @@
 using Zen.CUDA.Interop;
+using Zen.CUDA.Wrappers;
 
 namespace Zen.CUDA;
 
@@ -12,7 +13,7 @@ public static unsafe class DeviceArray
         return array;
     }
     
-    private static void* AllocateSpan(uint bytes, cudaStream* stream = null)
+    private static void* AllocateSpan(uint bytes, cudaStream* stream)
     {
         void* pointer;
         
@@ -37,11 +38,6 @@ public sealed unsafe class DeviceArray<T> : IDisposable where T : unmanaged
         Pointer = pointer;
     }
 
-    public void DisposeAsync(cudaStream* stream = null)
-    {
-        cudaFreeAsync(Pointer, stream);
-    }
-    
     public void Dispose()
     {
         cudaFree(Pointer);
