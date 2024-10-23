@@ -13,14 +13,14 @@ public static class ConvolutionExample
             array[i] = i + 1;
         }
         
-        var original = new Tensor<float>(shape: [16], array);
+        var original = Tensor.Create(shape: [16], array);
 
         var kernel = Shape.Create([3], original.Shape.Strides); // original strides = no dilation
         var shape  = Shape.Create(
             extents: [..original.Shape.Extents, ..kernel.Extents],
             strides: [..original.Shape.Strides, ..kernel.Strides]);
 
-        var conv = new Tensor<float>(shape, array);
+        var conv = Tensor.Create(shape, array);
         
         Utils.WriteLine(original);
         
@@ -57,14 +57,14 @@ public static class ConvolutionExample
             array[i] = i + 1;
         }
 
-        var original = new Tensor<float>(shape: [4, 4], array);
+        var original = Tensor.Create(shape: [4, 4], array);
         
         var kernel = Shape.Create([2, 2], original.Shape.Strides); // original strides = no dilation
         var shape  = Shape.Create(
             extents: [..original.Shape.Extents, ..kernel.Extents],
             strides: [..original.Shape.Strides, ..kernel.Strides]);
         
-        var conv = new Tensor<float>(shape, array);
+        var conv = Tensor.Create(shape, array);
         
         Utils.WriteLine(original);
         

@@ -1,4 +1,11 @@
-﻿namespace Zen.CUDA;
+﻿namespace Zen;
+
+public static class Tensor
+{
+    public static Tensor<T> Create<T>(Shape shape, TensorRef<T> reference) 
+        where T : unmanaged => 
+        new(shape, reference);
+}
 
 public sealed class Tensor<T> where T : unmanaged
 {

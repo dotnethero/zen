@@ -37,6 +37,18 @@ public readonly unsafe struct Shape : IEnumerable<int>
         Extents[range], 
         Strides[range]);
 
+    public Shape Permute(ReadOnlySpan<Axis> axis)
+    {
+        Span<int> extents = stackalloc int[Rank];
+        Span<int> strides = stackalloc int[Rank];
+        for (var i = 0; i < Rank; ++i)
+        {
+            extents[i] = Extents[axis[i].Index];
+            strides[i] = Strides[axis[i].Index];
+        }
+        return new(extents, strides);
+    }
+
     public Shape Slice(ReadOnlySpan<Coord> coords, out int offset)
     {
         offset = 0;
@@ -73,19 +85,7 @@ public readonly unsafe struct Shape : IEnumerable<int>
             extents[..rank], 
             strides[..rank]);
     }
-
-    public Shape Permute(ReadOnlySpan<Axis> axis)
-    {
-        Span<int> extents = stackalloc int[Rank];
-        Span<int> strides = stackalloc int[Rank];
-        for (var i = 0; i < Rank; ++i)
-        {
-            extents[i] = Extents[axis[i].Index];
-            strides[i] = Strides[axis[i].Index];
-        }
-        return new(extents, strides);
-    }
-
+    
     IEnumerator<int> IEnumerable<int>.GetEnumerator() => 
         Extents
             .AsEnumerable()

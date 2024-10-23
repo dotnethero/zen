@@ -1,11 +1,11 @@
-namespace Zen.CUDA;
+namespace Zen;
 
 public unsafe class TensorRef<T> where T : unmanaged
 {
-    internal readonly T* Pointer;
-    internal readonly int ElementSize;
+    public readonly T* Pointer;
+    public readonly int ElementSize;
     
-    internal TensorRef(T* pointer)
+    public TensorRef(T* pointer)
     {
         ElementSize = sizeof(T);
         Pointer = pointer;

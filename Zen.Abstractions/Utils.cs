@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Zen.CUDA;
+namespace Zen;
 
 public static class Utils
 {
@@ -11,7 +11,7 @@ public static class Utils
         Console.WriteLine($"{tensorName}{tensor.Shape} =\n{text}");
     }
     
-    private static string GetString<T>(Tensor<T> tensor, int depth = 0) where T : unmanaged
+    public static string GetString<T>(Tensor<T> tensor, int depth = 0) where T : unmanaged
     {
         var sb = new StringBuilder("[");
 
