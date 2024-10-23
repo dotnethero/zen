@@ -6,9 +6,11 @@ internal static class Program
 {
     public static void Main()
     {
-        CopyExample.Run();
-        GraphExample.Run();
-        EventExample.Run();
-        SliceExample.Run();
+        // CopyExample.Run();
+        // GraphExample.Run();
+        // EventExample.Run();
+        // SliceExample.Run();
+
+        ConvolutionExample.Conv2D();
     }
 }
