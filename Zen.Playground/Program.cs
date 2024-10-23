@@ -10,7 +10,7 @@ internal static class Program
         // GraphExample.Run();
         // EventExample.Run();
         // SliceExample.Run();
-
-        ConvolutionExample.Conv2D();
+        // ConvolutionExample.Conv1D();
+        // ConvolutionExample.Conv2D();
     }
 }

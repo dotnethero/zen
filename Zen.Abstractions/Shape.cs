@@ -37,26 +37,21 @@ public readonly unsafe struct Shape : IEnumerable<int>
         Extents[range], 
         Strides[range]);
 
-    public int GetOffset(ReadOnlySpan<Coord> indexes)
+    public Shape Slice(ReadOnlySpan<Coord> coords, out int offset)
     {
-        var offset = 0;
-        for (var i = 0; i < indexes.Length; ++i)
-        {
-            offset += Strides[i] * indexes[i].Start.GetOffset(Rank);     
-        }
-        return offset;
-    }
+        offset = 0;
 
-    public Shape Slice(ReadOnlySpan<Coord> coords)
-    {
         Span<int> extents = stackalloc int[Rank];
         Span<int> strides = stackalloc int[Rank];
 
         var rank = 0;
+        
         for (var i = 0; i < Rank; ++i)
         {
             if (i < coords.Length)
             {
+                offset += Strides[i] * coords[i].Start.GetOffset(Rank);     
+
                 var coord = coords[i];
                 if (coord.IsIndex)
                     continue;

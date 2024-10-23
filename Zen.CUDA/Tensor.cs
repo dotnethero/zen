@@ -13,8 +13,7 @@ public sealed class Tensor<T> where T : unmanaged
     
     public Tensor<T> Slice(params Coord[] coords)
     {
-        var shape = Shape.Slice(coords);
-        var offset = Shape.GetOffset(coords);
+        var shape = Shape.Slice(coords, out var offset);
         return new(shape, Reference + offset);
     }
 
