@@ -1,7 +1,6 @@
 ﻿using Zen.CUDA;
 using Zen.CUDA.Interop;
 using Zen.CUDA.Wrappers;
-using Zen.Playground.Examples;
 
 namespace Zen.Playground;
 
@@ -60,34 +59,35 @@ internal static unsafe class Program
             parameters.output_w,
             parameters.filter_c];
 
-        using var host_input = HostArray.Allocate<float>(input_shape.Size);
-        using var host_filter = HostArray.Allocate<float>(filter_shape.Size);
-        using var host_output = HostArray.Allocate<float>(output_shape.Size);
+        using var host_input  = HostTensor.Allocate<float>(input_shape);
+        using var host_filter = HostTensor.Allocate<float>(filter_shape);
+        using var host_output = HostTensor.Allocate<float>(output_shape);
         
-        for (var i = 0; i < host_input.Size; ++i)
+        using var input  = DeviceTensor.Allocate<float>(input_shape);
+        using var filter = DeviceTensor.Allocate<float>(filter_shape);
+        using var output = DeviceTensor.Allocate<float>(output_shape);
+        
+        for (var i = 0; i < host_input.Array.Size; ++i)
         {
-            host_input[i] = 1;
+            host_input.Array[i] = 1;
         }
 
-        for (var i = 0; i < host_filter.Size; ++i)
+        for (var i = 0; i < host_filter.Array.Size; ++i)
         {
-            host_filter[i] = 1f / filter_shape[1..].Size; // avg
-            host_filter[i] = 1f; // sum
+            host_filter.Array[i] = 1f / filter_shape[1..].Size; // avg
+            host_filter.Array[i] = 1f; // sum
         }
         
-        for (var i = 0; i < host_output.Size; ++i)
+        for (var i = 0; i < host_output.Array.Size; ++i)
         {
-            host_output[i] = float.NaN;
+            host_output.Array[i] = float.NaN;
         }
 
-        using var input_array  = DeviceArray.Allocate<float>(input_shape.Size);
-        using var filter_array = DeviceArray.Allocate<float>(filter_shape.Size);
-        using var output_array = DeviceArray.Allocate<float>(output_shape.Size);
-        
-        host_input.CopyTo(input_array, CudaStream.Default);
-        host_filter.CopyTo(filter_array, CudaStream.Default);
+        using var stream = new CudaStream();
 
-        CudaRuntime.cudaDeviceSynchronize();
+        host_input.CopyTo(input, stream);
+        host_filter.CopyTo(filter, stream);
+        stream.Synchronize();
 
         LibZen.zenCreateConv2dPlan(&plan, &parameters);
         LibZen.zenGetConv2dWorkspaceSize(plan, &size);
@@ -96,25 +96,20 @@ internal static unsafe class Program
         
         LibZen.zenExecuteConv2d(
             plan,
-            input_array.Pointer,
-            filter_array.Pointer,
-            output_array.Pointer,
+            input.Array.Pointer,
+            filter.Array.Pointer,
+            output.Array.Pointer,
             1.0f,
             0.0f,
-            output_array.Pointer,
+            output.Array.Pointer,
             ws.Pointer,
-            null);
+            stream.Pointer);
 
-        CudaRuntime.cudaDeviceSynchronize();
-
-        output_array.CopyTo(host_output, CudaStream.Default);
+        stream.Synchronize();
+        output.CopyTo(host_output);
         
-        var input_tensor = Tensor.Create(input_shape, host_input);
-        var filter_tensor = Tensor.Create(filter_shape, host_filter);
-        var output_tensor = Tensor.Create(output_shape, host_output);
-        
-        Utils.WriteLine(input_tensor.Slice(0, .., .., 0));
-        Utils.WriteLine(filter_tensor.Slice(0, .., .., 0));
-        Utils.WriteLine(output_tensor.Slice(0, .., .., 0));
+        Utils.WriteLine(host_input.Slice(0, .., .., 0));
+        Utils.WriteLine(host_filter.Slice(0, .., .., 0));
+        Utils.WriteLine(host_output.Slice(0, .., .., 0));
     }
 }

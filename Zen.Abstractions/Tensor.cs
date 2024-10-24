@@ -7,7 +7,7 @@ public static class Tensor
         new(shape, reference);
 }
 
-public sealed class Tensor<T> where T : unmanaged
+public class Tensor<T> where T : unmanaged
 {
     public readonly TensorRef<T> Reference;
     public readonly Shape Shape;
