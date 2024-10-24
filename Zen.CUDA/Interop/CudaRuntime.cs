@@ -1,6 +1,8 @@
 ﻿global using static Zen.CUDA.Interop.CudaRuntime;
-
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
+[assembly:InternalsVisibleTo("Zen.Playground")]
 
 namespace Zen.CUDA.Interop;
 

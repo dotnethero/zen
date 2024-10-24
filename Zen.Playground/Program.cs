@@ -28,18 +28,18 @@ internal static unsafe class Program
             input_n = 1,
             input_h = 8,
             input_w = 8,
-            input_c = 4,
-            filter_c = 4,
+            input_c = 1,
+            filter_c = 1,
             filter_h = 3,
             filter_w = 3,
-            padding_h = 0,
-            padding_w = 0,
+            padding_h = 1,
+            padding_w = 1,
             stride_h = 1,
             stride_w = 1,
             dilation_h = 1,
             dilation_w = 1,
-            output_h = 6,
-            output_w = 6,
+            output_h = 8,
+            output_w = 8,
         };
 
         Shape input_shape = [
@@ -81,11 +81,13 @@ internal static unsafe class Program
         }
 
         using var input_array  = DeviceArray.Allocate<float>(input_shape.Size);
-        using var output_array = DeviceArray.Allocate<float>(filter_shape.Size);
-        using var filter_array = DeviceArray.Allocate<float>(output_shape.Size);
+        using var filter_array = DeviceArray.Allocate<float>(filter_shape.Size);
+        using var output_array = DeviceArray.Allocate<float>(output_shape.Size);
         
         host_input.CopyTo(input_array, CudaStream.Default);
         host_filter.CopyTo(filter_array, CudaStream.Default);
+
+        CudaRuntime.cudaDeviceSynchronize();
 
         LibZen.zenCreateConv2dPlan(&plan, &parameters);
         LibZen.zenGetConv2dWorkspaceSize(plan, &size);
@@ -103,7 +105,8 @@ internal static unsafe class Program
             ws.Pointer,
             null);
 
-        CudaStream.Default.Synchronize();
+        CudaRuntime.cudaDeviceSynchronize();
+
         output_array.CopyTo(host_output, CudaStream.Default);
         
         var input_tensor = Tensor.Create(input_shape, host_input);
@@ -112,6 +115,6 @@ internal static unsafe class Program
         
         Utils.WriteLine(input_tensor.Slice(0, .., .., 0));
         Utils.WriteLine(filter_tensor.Slice(0, .., .., 0));
-        Utils.WriteLine(output_tensor);
+        Utils.WriteLine(output_tensor.Slice(0, .., .., 0));
     }
 }
