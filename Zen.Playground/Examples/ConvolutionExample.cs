@@ -82,17 +82,26 @@ public static unsafe class ConvolutionExample
 
         var ws = DeviceArray.Allocate<byte>((int)size);
         
+        stream.BeginCapture();
         LibZen.zenExecuteConv2d(
             plan,
             input.Array.Pointer,
             filter.Array.Pointer,
             output.Array.Pointer,
             1.0f,
-            0.0f,
+            1.0f,
             output.Array.Pointer,
             ws.Pointer,
             stream.Pointer);
 
+        using var graph = stream.EndCapture();
+        using var graphInstance = graph.CreateInstance();
+
+        for (var i = 0; i < 5; i++)
+        {
+            graphInstance.Launch(stream);
+        }
+        
         stream.Synchronize();
         output.CopyTo(host_output);
         

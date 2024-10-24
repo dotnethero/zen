@@ -32,14 +32,12 @@ public static unsafe partial class LibZen
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct zenConv2dPlan
+public struct zenConv2dPlan
 {
-    public void* operation; 
-    public void* problem_size;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct zenConv2dParams
+public struct zenConv2dParams
 {
     public int input_n;
     public int input_h;
