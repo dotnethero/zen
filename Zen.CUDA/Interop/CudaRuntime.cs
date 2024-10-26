@@ -8,7 +8,7 @@ namespace Zen.CUDA.Interop;
 
 internal static unsafe partial class CudaRuntime
 {
-    private const string LibraryName = "cudart64_12.dll";
+    private const string LibraryName = "cudalite.dll";
 
     [LibraryImport(LibraryName, EntryPoint = "cudaDeviceReset")]
     public static partial cudaStatus cudaDeviceReset();

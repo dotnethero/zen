@@ -12,6 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="..\Dependencies\cudalite.dll">
+        <Link>cudalite.dll</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="..\Dependencies\libzen.dll">
         <Link>libzen.dll</Link>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
