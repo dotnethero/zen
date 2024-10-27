@@ -18,13 +18,13 @@ public class Tensor<T> where T : unmanaged
         Shape = shape;
     }
     
-    public Tensor<T> Slice(params RangeOrIndex[] coords)
+    public Tensor<T> Slice(params ReadOnlySpan<RangeOrIndex> coords)
     {
         var shape = Shape.Slice(coords, out var offset);
         return new(shape, Reference + offset);
     }
 
-    public Tensor<T> Permute(params Axis[] axis)
+    public Tensor<T> Permute(params ReadOnlySpan<Axis> axis)
     {
         return new(Shape.Permute(axis), Reference);
     }

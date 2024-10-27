@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zen.Playground.Examples;
@@ -22,24 +23,27 @@ public static class ShapeExample
         var rowMajor = Shape.Create([3, 5], Layout.Right);
         var colMajor = Shape.Create([3, 5], Layout.Left);
 
-        var rowMajorLayout = new StringBuilder("Row-major layout:\n");
-        var colMajorLayout = new StringBuilder("Column-major layout:\n");
+        PrintLayout(rowMajor);
+        PrintLayout(rowMajor.Slice([1.., 1..^1], out var offset), offset);
+        PrintLayout(colMajor);
+    }
+
+    private static void PrintLayout(Shape shape, int offset = 0, [CallerArgumentExpression(nameof(shape))] string name = "")
+    {
+        var layout = new StringBuilder($"{name} has {shape.ToLayoutString()} layout:\n");
         
-        for (var i = 0; i < rowMajor.Extents[0]; ++i)
+        for (var i = 0; i < shape.Extents[0]; ++i)
         {
             if (i != 0)
             {
-                rowMajorLayout.AppendLine();
-                colMajorLayout.AppendLine();
+                layout.AppendLine();
             }
-            for (var j = 0; j < rowMajor.Extents[1]; ++j)
+            for (var j = 0; j < shape.Extents[1]; ++j)
             {
-                rowMajorLayout.Append($"{rowMajor.GetOffset([i, j]),4}");
-                colMajorLayout.Append($"{colMajor.GetOffset([i, j]),4}");
+                layout.Append($"{shape.GetOffset(i, j) + offset,4}");
             }
         }
-        
-        Console.WriteLine(rowMajorLayout.ToString());
-        Console.WriteLine(colMajorLayout.ToString());
+
+        Console.WriteLine(layout.ToString());
     }
 }

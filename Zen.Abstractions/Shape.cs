@@ -82,7 +82,7 @@ public readonly unsafe struct Shape : IEnumerable<int>
         return new(extents, strides);
     }
 
-    public int GetOffset(ReadOnlySpan<Index> coords)
+    public int GetOffset(params ReadOnlySpan<Index> coords)
     {
         ReadOnlySpan<int> extents = Extents.AsSpan();
         ReadOnlySpan<int> strides = Strides.AsSpan();
