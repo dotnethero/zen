@@ -18,7 +18,7 @@ public class Tensor<T> where T : unmanaged
         Shape = shape;
     }
     
-    public Tensor<T> Slice(params Coord[] coords)
+    public Tensor<T> Slice(params RangeOrIndex[] coords)
     {
         var shape = Shape.Slice(coords, out var offset);
         return new(shape, Reference + offset);

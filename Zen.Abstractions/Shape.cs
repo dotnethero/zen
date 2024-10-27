@@ -34,17 +34,17 @@ public readonly unsafe struct Shape : IEnumerable<int>
     }
 
     public Shape this[Range range] =>
-        Create(
+        new(
             Extents[range].AsSpan(), 
             Strides[range].AsSpan());
 
     public Shape Prepend(int extent, int stride) => 
-        Create(
+        new(
             [extent, ..Extents.AsSpan()],
             [stride, ..Strides.AsSpan()]);
 
     public Shape Append(int extent, int stride) => 
-        Create(
+        new(
             [..Extents.AsSpan(), extent],
             [..Strides.AsSpan(), stride]);
 
@@ -52,7 +52,7 @@ public readonly unsafe struct Shape : IEnumerable<int>
     {
         ReadOnlySpan<int> extents = Extents.AsSpan();
         ReadOnlySpan<int> strides = Strides.AsSpan();
-        return Create(
+        return new(
             [..extents[..axis], extent, ..extents[(axis + 1)..]],
             [..strides[..axis], stride, ..strides[(axis + 1)..]]);
     }
@@ -82,8 +82,28 @@ public readonly unsafe struct Shape : IEnumerable<int>
         return new(extents, strides);
     }
 
-    public Shape Slice(ReadOnlySpan<Coord> coords, out int offset)
+    public int GetOffset(ReadOnlySpan<Index> coords)
     {
+        ReadOnlySpan<int> extents = Extents.AsSpan();
+        ReadOnlySpan<int> strides = Strides.AsSpan();
+        
+        var offset = 0;
+        
+        for (var i = 0; i < Rank; ++i)
+        {
+            var extent = extents[i];
+            var stride = strides[i];
+            offset += coords[i].GetOffset(extent) * stride;
+        }
+        
+        return offset;
+    }
+
+    public Shape Slice(ReadOnlySpan<RangeOrIndex> coords, out int offset)
+    {
+        ReadOnlySpan<int> originalExtents = Extents.AsSpan();
+        ReadOnlySpan<int> originalStrides = Strides.AsSpan();
+
         offset = 0;
 
         Span<int> extents = stackalloc int[Rank];
@@ -93,27 +113,31 @@ public readonly unsafe struct Shape : IEnumerable<int>
         
         for (var i = 0; i < Rank; ++i)
         {
+            var extent = originalExtents[i];
+            var stride = originalStrides[i];
+
             if (i < coords.Length)
             {
-                offset += Strides[i] * coords[i].Start.GetOffset(Rank);     
-
                 var coord = coords[i];
+                var start = coord.Start.GetOffset(extent);
+                var end   = coord.End.GetOffset(extent);
+                
+                offset += stride * start;     
+
                 if (coord.IsIndex)
                     continue;
                 
-                var extent = Extents[i];
-                var start = coord.Start.GetOffset(extent);
-                var end   = coord.End.GetOffset(extent);
                 extents[rank] = end - start;
             }
             else
             {
-                extents[rank] = Extents[i];
+                extents[rank] = extent;
             }
 
-            strides[rank] = Strides[i];
+            strides[rank] = stride;
             rank++;
         }
+        
         return new(
             extents[..rank], 
             strides[..rank]);
