@@ -4,22 +4,22 @@ using System.Runtime.InteropServices;
 
 namespace Zen.CUDA.Interop;
 
-public static unsafe partial class LibZen
+public static unsafe class LibZen
 {
     private const string LibraryName = "libzen.dll";
     
-    [LibraryImport(LibraryName, EntryPoint = "zenCreateConv2dPlan")]
-    public static partial void zenCreateConv2dPlan(
+    [DllImport(LibraryName, EntryPoint = "zenCreateConv2dPlan")]
+    public static extern void zenCreateConv2dPlan(
         zenConv2dPlan** plan,
         zenConv2dParams* parameters);
 
-    [LibraryImport(LibraryName, EntryPoint = "zenGetConv2dWorkspaceSize")]
-    public static partial void zenGetConv2dWorkspaceSize(
+    [DllImport(LibraryName, EntryPoint = "zenGetConv2dWorkspaceSize")]
+    public static extern void zenGetConv2dWorkspaceSize(
         zenConv2dPlan* plan,
         nuint* size);
 
-    [LibraryImport(LibraryName, EntryPoint = "zenExecuteConv2d")]
-    public static partial void zenExecuteConv2d(
+    [DllImport(LibraryName, EntryPoint = "zenExecuteConv2d")]
+    public static extern void zenExecuteConv2d(
         zenConv2dPlan* plan,
         float* input,
         float* filter,
@@ -32,9 +32,7 @@ public static unsafe partial class LibZen
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct zenConv2dPlan
-{
-}
+public struct zenConv2dPlan;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct zenConv2dParams

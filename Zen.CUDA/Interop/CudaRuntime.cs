@@ -1,4 +1,6 @@
-﻿global using static Zen.CUDA.Interop.CudaRuntime;
+﻿// ReSharper disable InconsistentNaming
+
+global using static Zen.CUDA.Interop.CudaRuntime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -6,321 +8,321 @@ using System.Runtime.InteropServices;
 
 namespace Zen.CUDA.Interop;
 
-internal static unsafe partial class CudaRuntime
+internal static unsafe class CudaRuntime
 {
     private const string LibraryName = "cudalite.dll";
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceReset")]
-    public static partial cudaStatus cudaDeviceReset();
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceReset")]
+    public static extern cudaStatus cudaDeviceReset();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceSynchronize")]
-    public static partial cudaStatus cudaDeviceSynchronize();
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceSynchronize")]
+    public static extern cudaStatus cudaDeviceSynchronize();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceSetLimit")]
-    public static partial cudaStatus cudaDeviceSetLimit(cudaLimit limit, nuint value);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceSetLimit")]
+    public static extern cudaStatus cudaDeviceSetLimit(cudaLimit limit, nuint value);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGetLimit")]
-    public static partial cudaStatus cudaDeviceGetLimit(nuint* pValue, cudaLimit limit);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGetLimit")]
+    public static extern cudaStatus cudaDeviceGetLimit(nuint* pValue, cudaLimit limit);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGetCacheConfig")]
-    public static partial cudaStatus cudaDeviceGetCacheConfig(cudaFuncCache* pCacheConfig);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGetCacheConfig")]
+    public static extern cudaStatus cudaDeviceGetCacheConfig(cudaFuncCache* pCacheConfig);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGetStreamPriorityRange")]
-    public static partial cudaStatus cudaDeviceGetStreamPriorityRange(int* leastPriority, int* greatestPriority);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGetStreamPriorityRange")]
+    public static extern cudaStatus cudaDeviceGetStreamPriorityRange(int* leastPriority, int* greatestPriority);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceSetCacheConfig")]
-    public static partial cudaStatus cudaDeviceSetCacheConfig(cudaFuncCache cacheConfig);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceSetCacheConfig")]
+    public static extern cudaStatus cudaDeviceSetCacheConfig(cudaFuncCache cacheConfig);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGetSharedMemConfig")]
-    public static partial cudaStatus cudaDeviceGetSharedMemConfig(cudaSharedMemConfig* pConfig);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGetSharedMemConfig")]
+    public static extern cudaStatus cudaDeviceGetSharedMemConfig(cudaSharedMemConfig* pConfig);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceSetSharedMemConfig")]
-    public static partial cudaStatus cudaDeviceSetSharedMemConfig(cudaSharedMemConfig config);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceSetSharedMemConfig")]
+    public static extern cudaStatus cudaDeviceSetSharedMemConfig(cudaSharedMemConfig config);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadExit")]
-    public static partial cudaStatus cudaThreadExit();
+    [DllImport(LibraryName, EntryPoint = "cudaThreadExit")]
+    public static extern cudaStatus cudaThreadExit();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadSynchronize")]
-    public static partial cudaStatus cudaThreadSynchronize();
+    [DllImport(LibraryName, EntryPoint = "cudaThreadSynchronize")]
+    public static extern cudaStatus cudaThreadSynchronize();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadSetLimit")]
-    public static partial cudaStatus cudaThreadSetLimit(cudaLimit limit, nuint value);
+    [DllImport(LibraryName, EntryPoint = "cudaThreadSetLimit")]
+    public static extern cudaStatus cudaThreadSetLimit(cudaLimit limit, nuint value);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadGetLimit")]
-    public static partial cudaStatus cudaThreadGetLimit(nuint* pValue, cudaLimit limit);
+    [DllImport(LibraryName, EntryPoint = "cudaThreadGetLimit")]
+    public static extern cudaStatus cudaThreadGetLimit(nuint* pValue, cudaLimit limit);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadGetCacheConfig")]
-    public static partial cudaStatus cudaThreadGetCacheConfig(cudaFuncCache* pCacheConfig);
+    [DllImport(LibraryName, EntryPoint = "cudaThreadGetCacheConfig")]
+    public static extern cudaStatus cudaThreadGetCacheConfig(cudaFuncCache* pCacheConfig);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadSetCacheConfig")]
-    public static partial cudaStatus cudaThreadSetCacheConfig(cudaFuncCache cacheConfig);
+    [DllImport(LibraryName, EntryPoint = "cudaThreadSetCacheConfig")]
+    public static extern cudaStatus cudaThreadSetCacheConfig(cudaFuncCache cacheConfig);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetLastError")]
-    public static partial cudaStatus cudaGetLastError();
+    [DllImport(LibraryName, EntryPoint = "cudaGetLastError")]
+    public static extern cudaStatus cudaGetLastError();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaPeekAtLastError")]
-    public static partial cudaStatus cudaPeekAtLastError();
+    [DllImport(LibraryName, EntryPoint = "cudaPeekAtLastError")]
+    public static extern cudaStatus cudaPeekAtLastError();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetErrorName")]
-    public static partial byte* cudaGetErrorName(cudaStatus status);
+    [DllImport(LibraryName, EntryPoint = "cudaGetErrorName")]
+    public static extern byte* cudaGetErrorName(cudaStatus status);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetErrorString")]
-    public static partial byte* cudaGetErrorString(cudaStatus status);
+    [DllImport(LibraryName, EntryPoint = "cudaGetErrorString")]
+    public static extern byte* cudaGetErrorString(cudaStatus status);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetDeviceCount")]
-    public static partial cudaStatus cudaGetDeviceCount(int* count);
+    [DllImport(LibraryName, EntryPoint = "cudaGetDeviceCount")]
+    public static extern cudaStatus cudaGetDeviceCount(int* count);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetDeviceProperties_v2")]
-    public static partial cudaStatus cudaGetDeviceProperties(cudaDeviceProp* prop, int device);
+    [DllImport(LibraryName, EntryPoint = "cudaGetDeviceProperties_v2")]
+    public static extern cudaStatus cudaGetDeviceProperties(cudaDeviceProp* prop, int device);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGetAttribute")]
-    public static partial cudaStatus cudaDeviceGetAttribute(int* value, cudaDeviceAttr attr, int device);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGetAttribute")]
+    public static extern cudaStatus cudaDeviceGetAttribute(int* value, cudaDeviceAttr attr, int device);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaChooseDevice")]
-    public static partial cudaStatus cudaChooseDevice(int* device, cudaDeviceProp* prop);
+    [DllImport(LibraryName, EntryPoint = "cudaChooseDevice")]
+    public static extern cudaStatus cudaChooseDevice(int* device, cudaDeviceProp* prop);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaInitDevice")]
-    public static partial cudaStatus cudaInitDevice(int device, uint deviceFlags, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaInitDevice")]
+    public static extern cudaStatus cudaInitDevice(int device, uint deviceFlags, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaSetDevice")]
-    public static partial cudaStatus cudaSetDevice(int device);
+    [DllImport(LibraryName, EntryPoint = "cudaSetDevice")]
+    public static extern cudaStatus cudaSetDevice(int device);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetDevice")]
-    public static partial cudaStatus cudaGetDevice(int* device);
+    [DllImport(LibraryName, EntryPoint = "cudaGetDevice")]
+    public static extern cudaStatus cudaGetDevice(int* device);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaSetValidDevices")]
-    public static partial cudaStatus cudaSetValidDevices(int* device_arr, int len);
+    [DllImport(LibraryName, EntryPoint = "cudaSetValidDevices")]
+    public static extern cudaStatus cudaSetValidDevices(int* device_arr, int len);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaSetDeviceFlags")]
-    public static partial cudaStatus cudaSetDeviceFlags(uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaSetDeviceFlags")]
+    public static extern cudaStatus cudaSetDeviceFlags(uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetDeviceFlags")]
-    public static partial cudaStatus cudaGetDeviceFlags(uint* flags);
+    [DllImport(LibraryName, EntryPoint = "cudaGetDeviceFlags")]
+    public static extern cudaStatus cudaGetDeviceFlags(uint* flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamCreate")]
-    public static partial cudaStatus cudaStreamCreate(cudaStream** pStream);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamCreate")]
+    public static extern cudaStatus cudaStreamCreate(cudaStream** pStream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamCreateWithFlags")]
-    public static partial cudaStatus cudaStreamCreateWithFlags(cudaStream** pStream, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamCreateWithFlags")]
+    public static extern cudaStatus cudaStreamCreateWithFlags(cudaStream** pStream, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamCreateWithPriority")]
-    public static partial cudaStatus cudaStreamCreateWithPriority(cudaStream** pStream, uint flags, int priority);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamCreateWithPriority")]
+    public static extern cudaStatus cudaStreamCreateWithPriority(cudaStream** pStream, uint flags, int priority);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamGetPriority")]
-    public static partial cudaStatus cudaStreamGetPriority(cudaStream* hStream, int* priority);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamGetPriority")]
+    public static extern cudaStatus cudaStreamGetPriority(cudaStream* hStream, int* priority);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamGetFlags")]
-    public static partial cudaStatus cudaStreamGetFlags(cudaStream* hStream, uint* flags);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamGetFlags")]
+    public static extern cudaStatus cudaStreamGetFlags(cudaStream* hStream, uint* flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamGetId")]
-    public static partial cudaStatus cudaStreamGetId(cudaStream* hStream, ulong* streamId);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamGetId")]
+    public static extern cudaStatus cudaStreamGetId(cudaStream* hStream, ulong* streamId);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaCtxResetPersistingL2Cache")]
-    public static partial cudaStatus cudaCtxResetPersistingL2Cache();
+    [DllImport(LibraryName, EntryPoint = "cudaCtxResetPersistingL2Cache")]
+    public static extern cudaStatus cudaCtxResetPersistingL2Cache();
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamDestroy")]
-    public static partial cudaStatus cudaStreamDestroy(cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamDestroy")]
+    public static extern cudaStatus cudaStreamDestroy(cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamWaitEvent")]
-    public static partial cudaStatus cudaStreamWaitEvent(cudaStream* stream, cudaEvent* @event, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamWaitEvent")]
+    public static extern cudaStatus cudaStreamWaitEvent(cudaStream* stream, cudaEvent* @event, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamAddCallback")]
-    public static partial cudaStatus cudaStreamAddCallback(cudaStream* stream, delegate* unmanaged[Cdecl]<cudaStream*, cudaStatus, void*, void> callback, void* userData, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamAddCallback")]
+    public static extern cudaStatus cudaStreamAddCallback(cudaStream* stream, delegate* unmanaged[Cdecl]<cudaStream*, cudaStatus, void*, void> callback, void* userData, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamSynchronize")]
-    public static partial cudaStatus cudaStreamSynchronize(cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamSynchronize")]
+    public static extern cudaStatus cudaStreamSynchronize(cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamQuery")]
-    public static partial cudaStatus cudaStreamQuery(cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamQuery")]
+    public static extern cudaStatus cudaStreamQuery(cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamAttachMemAsync")]
-    public static partial cudaStatus cudaStreamAttachMemAsync(cudaStream* stream, void* devPtr, nuint length, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamAttachMemAsync")]
+    public static extern cudaStatus cudaStreamAttachMemAsync(cudaStream* stream, void* devPtr, nuint length, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamBeginCapture")]
-    public static partial cudaStatus cudaStreamBeginCapture(cudaStream* stream, cudaStreamCaptureMode mode);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamBeginCapture")]
+    public static extern cudaStatus cudaStreamBeginCapture(cudaStream* stream, cudaStreamCaptureMode mode);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaThreadExchangeStreamCaptureMode")]
-    public static partial cudaStatus cudaThreadExchangeStreamCaptureMode(cudaStreamCaptureMode* mode);
+    [DllImport(LibraryName, EntryPoint = "cudaThreadExchangeStreamCaptureMode")]
+    public static extern cudaStatus cudaThreadExchangeStreamCaptureMode(cudaStreamCaptureMode* mode);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamEndCapture")]
-    public static partial cudaStatus cudaStreamEndCapture(cudaStream* stream, cudaGraph** pGraph);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamEndCapture")]
+    public static extern cudaStatus cudaStreamEndCapture(cudaStream* stream, cudaGraph** pGraph);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaStreamIsCapturing")]
-    public static partial cudaStatus cudaStreamIsCapturing(cudaStream* stream, cudaStreamCaptureStatus* pCaptureStatus);
+    [DllImport(LibraryName, EntryPoint = "cudaStreamIsCapturing")]
+    public static extern cudaStatus cudaStreamIsCapturing(cudaStream* stream, cudaStreamCaptureStatus* pCaptureStatus);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventCreate")]
-    public static partial cudaStatus cudaEventCreate(cudaEvent** @event);
+    [DllImport(LibraryName, EntryPoint = "cudaEventCreate")]
+    public static extern cudaStatus cudaEventCreate(cudaEvent** @event);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventCreateWithFlags")]
-    public static partial cudaStatus cudaEventCreateWithFlags(cudaEvent** @event, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaEventCreateWithFlags")]
+    public static extern cudaStatus cudaEventCreateWithFlags(cudaEvent** @event, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventRecord")]
-    public static partial cudaStatus cudaEventRecord(cudaEvent* @event, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaEventRecord")]
+    public static extern cudaStatus cudaEventRecord(cudaEvent* @event, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventRecordWithFlags")]
-    public static partial cudaStatus cudaEventRecordWithFlags(cudaEvent* @event, cudaStream* stream, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaEventRecordWithFlags")]
+    public static extern cudaStatus cudaEventRecordWithFlags(cudaEvent* @event, cudaStream* stream, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventQuery")]
-    public static partial cudaStatus cudaEventQuery(cudaEvent* @event);
+    [DllImport(LibraryName, EntryPoint = "cudaEventQuery")]
+    public static extern cudaStatus cudaEventQuery(cudaEvent* @event);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventSynchronize")]
-    public static partial cudaStatus cudaEventSynchronize(cudaEvent* @event);
+    [DllImport(LibraryName, EntryPoint = "cudaEventSynchronize")]
+    public static extern cudaStatus cudaEventSynchronize(cudaEvent* @event);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventDestroy")]
-    public static partial cudaStatus cudaEventDestroy(cudaEvent* @event);
+    [DllImport(LibraryName, EntryPoint = "cudaEventDestroy")]
+    public static extern cudaStatus cudaEventDestroy(cudaEvent* @event);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaEventElapsedTime")]
-    public static partial cudaStatus cudaEventElapsedTime(float* ms, cudaEvent* start, cudaEvent* end);
+    [DllImport(LibraryName, EntryPoint = "cudaEventElapsedTime")]
+    public static extern cudaStatus cudaEventElapsedTime(float* ms, cudaEvent* start, cudaEvent* end);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMallocManaged")]
-    public static partial cudaStatus cudaMallocManaged(void** devPtr, nuint size, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaMallocManaged")]
+    public static extern cudaStatus cudaMallocManaged(void** devPtr, nuint size, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMalloc")]
-    public static partial cudaStatus cudaMalloc(void** devPtr, nuint size);
+    [DllImport(LibraryName, EntryPoint = "cudaMalloc")]
+    public static extern cudaStatus cudaMalloc(void** devPtr, nuint size);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMallocHost")]
-    public static partial cudaStatus cudaMallocHost(void** ptr, nuint size);
+    [DllImport(LibraryName, EntryPoint = "cudaMallocHost")]
+    public static extern cudaStatus cudaMallocHost(void** ptr, nuint size);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMallocPitch")]
-    public static partial cudaStatus cudaMallocPitch(void** devPtr, nuint* pitch, nuint width, nuint height);
+    [DllImport(LibraryName, EntryPoint = "cudaMallocPitch")]
+    public static extern cudaStatus cudaMallocPitch(void** devPtr, nuint* pitch, nuint width, nuint height);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaFree")]
-    public static partial cudaStatus cudaFree(void* devPtr);
+    [DllImport(LibraryName, EntryPoint = "cudaFree")]
+    public static extern cudaStatus cudaFree(void* devPtr);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaFreeHost")]
-    public static partial cudaStatus cudaFreeHost(void* ptr);
+    [DllImport(LibraryName, EntryPoint = "cudaFreeHost")]
+    public static extern cudaStatus cudaFreeHost(void* ptr);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaHostAlloc")]
-    public static partial cudaStatus cudaHostAlloc(void** pHost, nuint size, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaHostAlloc")]
+    public static extern cudaStatus cudaHostAlloc(void** pHost, nuint size, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaHostRegister")]
-    public static partial cudaStatus cudaHostRegister(void* ptr, nuint size, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaHostRegister")]
+    public static extern cudaStatus cudaHostRegister(void* ptr, nuint size, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaHostUnregister")]
-    public static partial cudaStatus cudaHostUnregister(void* ptr);
+    [DllImport(LibraryName, EntryPoint = "cudaHostUnregister")]
+    public static extern cudaStatus cudaHostUnregister(void* ptr);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaHostGetDevicePointer")]
-    public static partial cudaStatus cudaHostGetDevicePointer(void** pDevice, void* pHost, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaHostGetDevicePointer")]
+    public static extern cudaStatus cudaHostGetDevicePointer(void** pDevice, void* pHost, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaHostGetFlags")]
-    public static partial cudaStatus cudaHostGetFlags(uint* pFlags, void* pHost);
+    [DllImport(LibraryName, EntryPoint = "cudaHostGetFlags")]
+    public static extern cudaStatus cudaHostGetFlags(uint* pFlags, void* pHost);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemGetInfo")]
-    public static partial cudaStatus cudaMemGetInfo(nuint* free, nuint* total);
+    [DllImport(LibraryName, EntryPoint = "cudaMemGetInfo")]
+    public static extern cudaStatus cudaMemGetInfo(nuint* free, nuint* total);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpy")]
-    public static partial cudaStatus cudaMemcpy(void* dst, void* src, nuint count, cudaMemcpyKind kind);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpy")]
+    public static extern cudaStatus cudaMemcpy(void* dst, void* src, nuint count, cudaMemcpyKind kind);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpyPeer")]
-    public static partial cudaStatus cudaMemcpyPeer(void* dst, int dstDevice, void* src, int srcDevice, nuint count);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpyPeer")]
+    public static extern cudaStatus cudaMemcpyPeer(void* dst, int dstDevice, void* src, int srcDevice, nuint count);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpy2D")]
-    public static partial cudaStatus cudaMemcpy2D(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpy2D")]
+    public static extern cudaStatus cudaMemcpy2D(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpyToSymbol")]
-    public static partial cudaStatus cudaMemcpyToSymbol(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpyToSymbol")]
+    public static extern cudaStatus cudaMemcpyToSymbol(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpyFromSymbol")]
-    public static partial cudaStatus cudaMemcpyFromSymbol(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpyFromSymbol")]
+    public static extern cudaStatus cudaMemcpyFromSymbol(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpyAsync")]
-    public static partial cudaStatus cudaMemcpyAsync(void* dst, void* src, nuint count, cudaMemcpyKind kind, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpyAsync")]
+    public static extern cudaStatus cudaMemcpyAsync(void* dst, void* src, nuint count, cudaMemcpyKind kind, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpy2DAsync")]
-    public static partial cudaStatus cudaMemcpy2DAsync(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpy2DAsync")]
+    public static extern cudaStatus cudaMemcpy2DAsync(void* dst, nuint dpitch, void* src, nuint spitch, nuint width, nuint height, cudaMemcpyKind kind, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpyToSymbolAsync")]
-    public static partial cudaStatus cudaMemcpyToSymbolAsync(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpyToSymbolAsync")]
+    public static extern cudaStatus cudaMemcpyToSymbolAsync(void* symbol, void* src, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemcpyFromSymbolAsync")]
-    public static partial cudaStatus cudaMemcpyFromSymbolAsync(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaMemcpyFromSymbolAsync")]
+    public static extern cudaStatus cudaMemcpyFromSymbolAsync(void* dst, void* symbol, nuint count, nuint offset, cudaMemcpyKind kind, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetSymbolAddress")]
-    public static partial cudaStatus cudaGetSymbolAddress(void** devPtr, void* symbol);
+    [DllImport(LibraryName, EntryPoint = "cudaGetSymbolAddress")]
+    public static extern cudaStatus cudaGetSymbolAddress(void** devPtr, void* symbol);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetSymbolSize")]
-    public static partial cudaStatus cudaGetSymbolSize(nuint* size, void* symbol);
+    [DllImport(LibraryName, EntryPoint = "cudaGetSymbolSize")]
+    public static extern cudaStatus cudaGetSymbolSize(nuint* size, void* symbol);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemPrefetchAsync")]
-    public static partial cudaStatus cudaMemPrefetchAsync(void* devPtr, nuint count, int dstDevice, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaMemPrefetchAsync")]
+    public static extern cudaStatus cudaMemPrefetchAsync(void* devPtr, nuint count, int dstDevice, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemPrefetchAsync_v2")]
-    public static partial cudaStatus cudaMemPrefetchAsync_v2(void* devPtr, nuint count, cudaMemLocation location, uint flags, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaMemPrefetchAsync_v2")]
+    public static extern cudaStatus cudaMemPrefetchAsync_v2(void* devPtr, nuint count, cudaMemLocation location, uint flags, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemAdvise")]
-    public static partial cudaStatus cudaMemAdvise(void* devPtr, nuint count, cudaMemoryAdvise advice, int device);
+    [DllImport(LibraryName, EntryPoint = "cudaMemAdvise")]
+    public static extern cudaStatus cudaMemAdvise(void* devPtr, nuint count, cudaMemoryAdvise advice, int device);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemAdvise_v2")]
-    public static partial cudaStatus cudaMemAdvise_v2(void* devPtr, nuint count, cudaMemoryAdvise advice, cudaMemLocation location);
+    [DllImport(LibraryName, EntryPoint = "cudaMemAdvise_v2")]
+    public static extern cudaStatus cudaMemAdvise_v2(void* devPtr, nuint count, cudaMemoryAdvise advice, cudaMemLocation location);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemRangeGetAttribute")]
-    public static partial cudaStatus cudaMemRangeGetAttribute(void* data, nuint dataSize, cudaMemRangeAttribute attribute, void* devPtr, nuint count);
+    [DllImport(LibraryName, EntryPoint = "cudaMemRangeGetAttribute")]
+    public static extern cudaStatus cudaMemRangeGetAttribute(void* data, nuint dataSize, cudaMemRangeAttribute attribute, void* devPtr, nuint count);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMemRangeGetAttributes")]
-    public static partial cudaStatus cudaMemRangeGetAttributes(void** data, nuint* dataSizes, cudaMemRangeAttribute* attributes, nuint numAttributes, void* devPtr, nuint count);
+    [DllImport(LibraryName, EntryPoint = "cudaMemRangeGetAttributes")]
+    public static extern cudaStatus cudaMemRangeGetAttributes(void** data, nuint* dataSizes, cudaMemRangeAttribute* attributes, nuint numAttributes, void* devPtr, nuint count);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaMallocAsync")]
-    public static partial cudaStatus cudaMallocAsync(void** devPtr, nuint size, cudaStream* hStream);
+    [DllImport(LibraryName, EntryPoint = "cudaMallocAsync")]
+    public static extern cudaStatus cudaMallocAsync(void** devPtr, nuint size, cudaStream* hStream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaFreeAsync")]
-    public static partial cudaStatus cudaFreeAsync(void* devPtr, cudaStream* hStream);
+    [DllImport(LibraryName, EntryPoint = "cudaFreeAsync")]
+    public static extern cudaStatus cudaFreeAsync(void* devPtr, cudaStream* hStream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaPointerGetAttributes")]
-    public static partial cudaStatus cudaPointerGetAttributes(cudaPointerAttributes* attributes, void* ptr);
+    [DllImport(LibraryName, EntryPoint = "cudaPointerGetAttributes")]
+    public static extern cudaStatus cudaPointerGetAttributes(cudaPointerAttributes* attributes, void* ptr);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDriverGetVersion")]
-    public static partial cudaStatus cudaDriverGetVersion(int* driverVersion);
+    [DllImport(LibraryName, EntryPoint = "cudaDriverGetVersion")]
+    public static extern cudaStatus cudaDriverGetVersion(int* driverVersion);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaRuntimeGetVersion")]
-    public static partial cudaStatus cudaRuntimeGetVersion(int* runtimeVersion);
+    [DllImport(LibraryName, EntryPoint = "cudaRuntimeGetVersion")]
+    public static extern cudaStatus cudaRuntimeGetVersion(int* runtimeVersion);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphCreate")]
-    public static partial cudaStatus cudaGraphCreate(cudaGraph** pGraph, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphCreate")]
+    public static extern cudaStatus cudaGraphCreate(cudaGraph** pGraph, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGraphMemTrim")]
-    public static partial cudaStatus cudaDeviceGraphMemTrim(int device);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGraphMemTrim")]
+    public static extern cudaStatus cudaDeviceGraphMemTrim(int device);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceGetGraphMemAttribute")]
-    public static partial cudaStatus cudaDeviceGetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceGetGraphMemAttribute")]
+    public static extern cudaStatus cudaDeviceGetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaDeviceSetGraphMemAttribute")]
-    public static partial cudaStatus cudaDeviceSetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
+    [DllImport(LibraryName, EntryPoint = "cudaDeviceSetGraphMemAttribute")]
+    public static extern cudaStatus cudaDeviceSetGraphMemAttribute(int device, cudaGraphMemAttributeType attr, void* value);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphClone")]
-    public static partial cudaStatus cudaGraphClone(cudaGraph** pGraphClone, cudaGraph* originalGraph);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphClone")]
+    public static extern cudaStatus cudaGraphClone(cudaGraph** pGraphClone, cudaGraph* originalGraph);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphInstantiate")]
-    public static partial cudaStatus cudaGraphInstantiate(cudaGraphInstance** pGraphExec, cudaGraph* graph, ulong flags);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphInstantiate")]
+    public static extern cudaStatus cudaGraphInstantiate(cudaGraphInstance** pGraphExec, cudaGraph* graph, ulong flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphInstantiateWithFlags")]
-    public static partial cudaStatus cudaGraphInstantiateWithFlags(cudaGraphInstance** pGraphExec, cudaGraph* graph, ulong flags);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphInstantiateWithFlags")]
+    public static extern cudaStatus cudaGraphInstantiateWithFlags(cudaGraphInstance** pGraphExec, cudaGraph* graph, ulong flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphExecGetFlags")]
-    public static partial cudaStatus cudaGraphExecGetFlags(cudaGraphInstance* graphExec, ulong* flags);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphExecGetFlags")]
+    public static extern cudaStatus cudaGraphExecGetFlags(cudaGraphInstance* graphExec, ulong* flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphUpload")]
-    public static partial cudaStatus cudaGraphUpload(cudaGraphInstance* graphExec, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphUpload")]
+    public static extern cudaStatus cudaGraphUpload(cudaGraphInstance* graphExec, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphLaunch")]
-    public static partial cudaStatus cudaGraphLaunch(cudaGraphInstance* graphExec, cudaStream* stream);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphLaunch")]
+    public static extern cudaStatus cudaGraphLaunch(cudaGraphInstance* graphExec, cudaStream* stream);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphExecDestroy")]
-    public static partial cudaStatus cudaGraphExecDestroy(cudaGraphInstance* graphExec);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphExecDestroy")]
+    public static extern cudaStatus cudaGraphExecDestroy(cudaGraphInstance* graphExec);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphDestroy")]
-    public static partial cudaStatus cudaGraphDestroy(cudaGraph* graph);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphDestroy")]
+    public static extern cudaStatus cudaGraphDestroy(cudaGraph* graph);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGraphDebugDotPrint")]
-    public static partial cudaStatus cudaGraphDebugDotPrint(cudaGraph* graph, byte* path, uint flags);
+    [DllImport(LibraryName, EntryPoint = "cudaGraphDebugDotPrint")]
+    public static extern cudaStatus cudaGraphDebugDotPrint(cudaGraph* graph, byte* path, uint flags);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetDriverEntryPoint")]
-    public static partial cudaStatus cudaGetDriverEntryPoint(byte* symbol, void** funcPtr, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
+    [DllImport(LibraryName, EntryPoint = "cudaGetDriverEntryPoint")]
+    public static extern cudaStatus cudaGetDriverEntryPoint(byte* symbol, void** funcPtr, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetDriverEntryPointByVersion")]
-    public static partial cudaStatus cudaGetDriverEntryPointByVersion(byte* symbol, void** funcPtr, uint cudaVersion, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
+    [DllImport(LibraryName, EntryPoint = "cudaGetDriverEntryPointByVersion")]
+    public static extern cudaStatus cudaGetDriverEntryPointByVersion(byte* symbol, void** funcPtr, uint cudaVersion, ulong flags, cudaDriverEntryPointQueryResult* driverStatus);
 
-    [LibraryImport(LibraryName, EntryPoint = "cudaGetExportTable")]
-    public static partial cudaStatus cudaGetExportTable(void** ppExportTable, cudaGuid* pExportTableId);
+    [DllImport(LibraryName, EntryPoint = "cudaGetExportTable")]
+    public static extern cudaStatus cudaGetExportTable(void** ppExportTable, cudaGuid* pExportTableId);
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -447,27 +449,16 @@ internal unsafe struct cudaDeviceProp
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct cudaStream
-{
-}
+internal struct cudaStream;
 
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe struct cudaEvent
-{
-    public fixed byte _unused[1];
-}
+internal struct cudaEvent;
 
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe struct cudaGraph
-{
-    public fixed byte _unused[1];
-}
+internal struct cudaGraph;
 
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe struct cudaGraphInstance
-{
-    public fixed byte _unused[1];
-}
+internal struct cudaGraphInstance;
 
 internal enum cudaStatus
 {

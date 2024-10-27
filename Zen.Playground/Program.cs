@@ -6,7 +6,7 @@ internal static class Program
 {
     public static void Main()
     {
-        ShapeExample.Run();
+        // ShapeExample.Run();
         // CopyExample.Run();
         // GraphExample.Run();
         // EventExample.Run();
