@@ -33,19 +33,28 @@ public readonly unsafe struct Shape : IEnumerable<int>
         Size = Shapes.GetSize(extents);
     }
 
+    private Shape(int extent, int stride)
+    {
+        Rank = 1;
+        Extents = [extent];
+        Strides = [stride];
+        Size = extent;
+    }
+
+    public Shape this[Index index] =>
+        new(Extents[index], 
+            Strides[index]);
+    
     public Shape this[Range range] =>
-        new(
-            Extents[range].AsSpan(), 
+        new(Extents[range].AsSpan(), 
             Strides[range].AsSpan());
 
     public Shape Prepend(int extent, int stride) => 
-        new(
-            [extent, ..Extents.AsSpan()],
+        new([extent, ..Extents.AsSpan()],
             [stride, ..Strides.AsSpan()]);
 
     public Shape Append(int extent, int stride) => 
-        new(
-            [..Extents.AsSpan(), extent],
+        new([..Extents.AsSpan(), extent],
             [..Strides.AsSpan(), stride]);
 
     public Shape Replace(Axis axis, int extent, int stride)
