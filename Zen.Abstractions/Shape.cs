@@ -151,6 +151,25 @@ public readonly unsafe struct Shape : IEnumerable<int>
             extents[..rank], 
             strides[..rank]);
     }
+
+    public Shape Reshape(Shape inner)
+    {
+        if (Rank == 1)
+        {
+            Span<int> extents = stackalloc int[inner.Rank];
+            Span<int> strides = stackalloc int[inner.Rank];
+            
+            for (var i = 0; i < inner.Rank; ++i)
+            {
+                extents[i] = inner.Extents[i];
+                strides[i] = inner.Strides[i] * Strides[0];
+            }
+            
+            return Create(extents, strides);
+        }
+
+        throw new NotImplementedException();
+    }
     
     IEnumerator<int> IEnumerable<int>.GetEnumerator() => 
         Extents

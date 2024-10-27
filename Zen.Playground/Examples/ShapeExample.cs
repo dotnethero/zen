@@ -28,6 +28,14 @@ public static class ShapeExample
         PrintLayout(colMajor);
     }
 
+    public static void RunComposition()
+    {
+        var input = Shape.Create([20], [2]);
+        var shape = Shape.Create([5, 4], Layout.Right);
+
+        PrintLayout(input.Reshape(shape));
+    }
+
     private static void PrintLayout(Shape shape, int offset = 0, [CallerArgumentExpression(nameof(shape))] string name = "")
     {
         var layout = new StringBuilder($"{name} has {shape.ToLayoutString()} layout:\n");

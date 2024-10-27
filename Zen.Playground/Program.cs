@@ -12,5 +12,7 @@ internal static class Program
         // EventExample.Run();
         // SliceExample.Run();
         // ConvolutionExample.Run();
+        
+        ShapeExample.RunComposition();
     }
 }
