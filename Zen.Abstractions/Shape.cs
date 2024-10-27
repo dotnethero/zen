@@ -33,9 +33,31 @@ public readonly unsafe struct Shape : IEnumerable<int>
         Size = Shapes.GetSize(extents);
     }
 
-    public Shape this[Range range] => new(
-        Extents[range], 
-        Strides[range]);
+    public Shape this[Range range] =>
+        Create(
+            Extents[range].AsSpan(), 
+            Strides[range].AsSpan());
+
+    public Shape Prepend(int extent, int stride) => 
+        Create(
+            [extent, ..Extents.AsSpan()],
+            [stride, ..Strides.AsSpan()]);
+
+    public Shape Append(int extent, int stride) => 
+        Create(
+            [..Extents.AsSpan(), extent],
+            [..Strides.AsSpan(), stride]);
+
+    public Shape Replace(Axis axis, int extent, int stride)
+    {
+        ReadOnlySpan<int> extents = Extents.AsSpan();
+        ReadOnlySpan<int> strides = Strides.AsSpan();
+        return Create(
+            [..extents[..axis], extent, ..extents[(axis + 1)..]],
+            [..strides[..axis], stride, ..strides[(axis + 1)..]]);
+    }
+
+    public Shape Reduce(Axis axis) => Replace(axis, 1, 0);
 
     public Shape Permute(ReadOnlySpan<Axis> axis)
     {
@@ -46,6 +68,17 @@ public readonly unsafe struct Shape : IEnumerable<int>
             extents[i] = Extents[axis[i].Index];
             strides[i] = Strides[axis[i].Index];
         }
+        return new(extents, strides);
+    }
+
+    public Shape Transpose(Axis axis1, Axis axis2)
+    {
+        Span<int> extents = [..Extents.AsSpan()];
+        Span<int> strides = [..Strides.AsSpan()];
+        extents[axis1] = Extents[axis2];
+        extents[axis2] = Extents[axis1];
+        strides[axis1] = Strides[axis2];
+        strides[axis2] = Strides[axis1];
         return new(extents, strides);
     }
 
@@ -68,9 +101,9 @@ public readonly unsafe struct Shape : IEnumerable<int>
                 if (coord.IsIndex)
                     continue;
                 
-                var total = Extents[i];
-                var start = coord.Start.GetOffset(total);
-                var end   = coord.End.GetOffset(total);
+                var extent = Extents[i];
+                var start = coord.Start.GetOffset(extent);
+                var end   = coord.End.GetOffset(extent);
                 extents[rank] = end - start;
             }
             else
@@ -95,6 +128,8 @@ public readonly unsafe struct Shape : IEnumerable<int>
         Extents
             .AsEnumerable()
             .GetEnumerator();
-    
+
+    public string ToLayoutString() => $"({string.Join(",", Extents)}):({string.Join(",", Strides)})";
+
     public override string ToString() => $"({string.Join(",", Extents)})";
 }
