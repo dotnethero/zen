@@ -14,11 +14,11 @@ public static class ShapeExample
         var prepended = shape.Prepend(extent: 1, stride: 0);
         var transposed = shape.Transpose(^1, ^2);
         
-        Console.WriteLine(shape.ToLayoutString());
-        Console.WriteLine(reduced.ToLayoutString());
-        Console.WriteLine(appended.ToLayoutString());
-        Console.WriteLine(prepended.ToLayoutString());
-        Console.WriteLine(transposed.ToLayoutString());
+        Console.WriteLine(shape);
+        Console.WriteLine(reduced);
+        Console.WriteLine(appended);
+        Console.WriteLine(prepended);
+        Console.WriteLine(transposed);
 
         var rowMajor = Shape.Create([3, 5], Layout.Right);
         var colMajor = Shape.Create([3, 5], Layout.Left);
@@ -30,15 +30,20 @@ public static class ShapeExample
 
     public static void RunComposition()
     {
-        var input = Shape.Create([20], [2]);
-        var shape = Shape.Create([5, 4], Layout.Right);
+        var input1 = Shape.Create([20], [2]);
+        var shape1 = Shape.Create([5, 4]);
 
-        PrintLayout(input.Reshape(shape));
+        PrintLayout(input1.Compose(shape1)); // (5,4):(8,2)
+        
+        var input2 = Shape.Create(extents: [10, 2], strides: [16, 4]);
+        var shape2 = Shape.Create(extents: [5, 4],  strides: [1, 5]);
+
+        Console.WriteLine(input2.Compose(shape2)); // ((5,1),(2,2)):((16,4),(80,4))
     }
 
     private static void PrintLayout(Shape shape, int offset = 0, [CallerArgumentExpression(nameof(shape))] string name = "")
     {
-        var layout = new StringBuilder($"{name} has {shape.ToLayoutString()} layout:\n");
+        var layout = new StringBuilder($"{name} has {shape} layout:\n");
         
         for (var i = 0; i < shape.Extents[0]; ++i)
         {

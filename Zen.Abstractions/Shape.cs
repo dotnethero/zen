@@ -57,6 +57,40 @@ public readonly unsafe struct Shape : IEnumerable<int>
         new([..Extents.AsSpan(), extent],
             [..Strides.AsSpan(), stride]);
 
+    public static Shape Concat(Shape[] shapes)
+    {
+        var rank = shapes.Sum(x => x.Rank);
+        
+        Span<int> extents = stackalloc int[rank];
+        Span<int> strides = stackalloc int[rank];
+
+        var k = 0;
+        
+        for (var i = 0; i < shapes.Length; ++i)
+        for (var j = 0; j < shapes[i].Rank; ++j)
+        {
+            extents[k] = shapes[i].Extents[j];
+            strides[k] = shapes[i].Strides[j];
+            ++k;
+        }
+
+        return new Shape(extents, strides);
+    }
+
+    public static Shape[] Split(Shape shape)
+    {
+        var shapes = new Shape[shape.Rank];
+        
+        for (var i = 0; i < shape.Rank; ++i)
+        {
+            shapes[i] = new(
+                shape.Extents[i],
+                shape.Strides[i]);
+        }
+        
+        return shapes;
+    }
+    
     public Shape Replace(Axis axis, int extent, int stride)
     {
         ReadOnlySpan<int> extents = Extents.AsSpan();
@@ -152,8 +186,10 @@ public readonly unsafe struct Shape : IEnumerable<int>
             strides[..rank]);
     }
 
-    public Shape Reshape(Shape inner)
+    public Shape Compose(Shape inner)
     {
+        static int CeilDiv(int a, int b) => (a + b - 1) / b;
+
         if (Rank == 1)
         {
             Span<int> extents = stackalloc int[inner.Rank];
@@ -168,9 +204,53 @@ public readonly unsafe struct Shape : IEnumerable<int>
             return Create(extents, strides);
         }
 
+        if (inner.Rank == 1)
+        {
+            Span<int> extents = stackalloc int[Rank];
+            Span<int> strides = stackalloc int[Rank];
+
+            var curExtent = inner.Extents[0];
+            var curStride = inner.Strides[0];
+
+            if (curStride == 1)
+            {
+                for (var i = 0; i < Rank; ++i)
+                {
+                    var newExtent = int.Min(Extents[i], curExtent);
+                        curExtent = CeilDiv(curExtent, Extents[i]); 
+            
+                    extents[i] = newExtent;
+                    strides[i] = Strides[i];
+                }
+            }
+            else
+            {
+                for (var i = 0; i < Rank; ++i)
+                {
+                    var newExtent = CeilDiv(Extents[i], curStride);
+                        curStride = CeilDiv(curStride, Extents[i]); 
+            
+                    extents[i] = newExtent;
+                    strides[i] = i == 0
+                        ? Strides[i] * inner.Strides[i]
+                        : Strides[i];
+                }
+            }
+
+            return Create(extents, strides);
+        }
+        else
+        {
+            var composes = Split(inner)
+                .Select(Compose)
+                .ToArray();
+
+            return Concat(composes);
+        }
+
         throw new NotImplementedException();
     }
-    
+   
     IEnumerator<int> IEnumerable<int>.GetEnumerator() => 
         Extents
             .AsEnumerable()
@@ -181,7 +261,5 @@ public readonly unsafe struct Shape : IEnumerable<int>
             .AsEnumerable()
             .GetEnumerator();
 
-    public string ToLayoutString() => $"({string.Join(",", Extents)}):({string.Join(",", Strides)})";
-
-    public override string ToString() => $"({string.Join(",", Extents)})";
+    public override string ToString() => $"({string.Join(",", Extents)}):({string.Join(",", Strides)})";
 }
