@@ -7,9 +7,11 @@ public static class MatMulExample
 {
     public static void Run()
     {
-        using var a = HostTensor.Allocate<float>([3, 4]);
-        using var b = HostTensor.Allocate<float>([5, 4]); // b is allocated transposed
-        using var c = HostTensor.Allocate<float>([3, 5]);
+        var batchSize = 2;
+        
+        using var a = HostTensor.Allocate<float>([batchSize, 3, 4]);
+        using var b = HostTensor.Allocate<float>([batchSize, 5, 4]); // b is allocated transposed
+        using var c = HostTensor.Allocate<float>([batchSize, 3, 5]);
 
         for (var i = 0; i < a.Array.Size; ++i)
         {
@@ -20,8 +22,15 @@ public static class MatMulExample
         {
             b.Array[i] = i % 3;
         }
-        
-        MatMul(a, b.Transpose(), c); // permutations are non-allocative
+
+        for (int i = 0; i < batchSize; i++)
+        {
+            // slice and permutations are non-allocative
+            MatMul(
+                a.Slice(i),
+                b.Slice(i).Transpose(),
+                c.Slice(i));
+        }
 
         Utils.WriteLine(a);
         Utils.WriteLine(b);
