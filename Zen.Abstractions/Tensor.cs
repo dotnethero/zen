@@ -41,4 +41,9 @@ public class Tensor<T> where T : unmanaged
     {
         return new(Shape.Permute(axis), Reference);
     }
+    
+    public Tensor<T> Transpose()
+    {
+        return new(Shape.Transpose(^0, ^1), Reference);
+    }
 }

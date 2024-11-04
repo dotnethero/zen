@@ -14,6 +14,8 @@ internal static class Program
         // SliceExample.Run();
         // ConvolutionExample.Run();
 
-        BroadcastExample.Run();
+        // BroadcastExample.Run();
+        
+        MatMulExample.Run();
     }
 }
