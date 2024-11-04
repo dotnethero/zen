@@ -1,4 +1,5 @@
 ﻿using Zen.Playground.Examples;
+using Zen.Playground.Reference;
 
 namespace Zen.Playground;
 
@@ -12,5 +13,7 @@ internal static class Program
         // EventExample.Run();
         // SliceExample.Run();
         // ConvolutionExample.Run();
+
+        BroadcastExample.Run();
     }
 }

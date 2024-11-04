@@ -40,7 +40,7 @@ public readonly unsafe struct Shape : IEnumerable<int>
         Strides = [stride];
         Size = extent;
     }
-
+    
     public Shape this[Index index] =>
         new(Extents[index], 
             Strides[index]);
