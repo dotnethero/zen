@@ -18,20 +18,12 @@ public class Tensor<T> where T : unmanaged
         Shape = shape;
     }
     
-    public T this[params ReadOnlySpan<Index> coord]
+    public ref T this[params ReadOnlySpan<LogicalCoord> coords]
     {
         get
         {
-            EnsureRanksAreEqual(coord);
-
-            var offset = Shape.GetOffset(coord);
-            return Reference[offset];
-        }
-        set
-        {
-            EnsureRanksAreEqual(coord);
-            var offset = Shape.GetOffset(coord);
-            Reference[offset] = value;
+            var offset = Shape.GetOffset(coords);
+            return ref Reference[offset];
         }
     }
 
@@ -39,21 +31,14 @@ public class Tensor<T> where T : unmanaged
     
     public Tensor<T> AppendDimension() => new(Shape.Append(1, 0), Reference);
 
-    public Tensor<T> Slice(params ReadOnlySpan<RangeOrIndex> coords)
+    public Tensor<T> Slice(params ReadOnlySpan<LogicalRange> slice)
     {
-        var shape = Shape.Slice(coords, out var offset);
+        var shape = Shape.Slice(slice, out var offset);
         return new(shape, Reference + offset);
     }
 
     public Tensor<T> Permute(params ReadOnlySpan<Axis> axis)
     {
         return new(Shape.Permute(axis), Reference);
-    }
-    
-    // TODO: Extract common checks
-    private void EnsureRanksAreEqual(ReadOnlySpan<Index> coord)
-    {
-        if (coord.Length != Shape.Rank)
-            throw new InvalidOperationException($"Can not apply {coord.Length} rank coordinate to {Shape.Rank} tensor");
     }
 }

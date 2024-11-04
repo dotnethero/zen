@@ -24,20 +24,20 @@ public static class BroadcastExample
         var col = b.AppendDimension();
         var row = b.PrependDimension();
         
-        Sum(a, row, c);
+        Sum2D(a, row, c);
         Utils.WriteLine(a);
         Utils.WriteLine(row);
         Utils.WriteLine(c);
         
         Console.WriteLine(new string('=', 40));
         
-        Sum(a, col, c);
+        Sum2D(a, col, c);
         Utils.WriteLine(a);
         Utils.WriteLine(col);
         Utils.WriteLine(c);
     }
 
-    private static void Sum<T>(Tensor<T> a, Tensor<T> b, Tensor<T> c) where T : unmanaged, IFloatingPoint<T>
+    private static void Sum2D<T>(Tensor<T> a, Tensor<T> b, Tensor<T> c) where T : unmanaged, IFloatingPoint<T>
     {
         for (var i = 0; i < c.Shape.Extents[0]; ++i)
         {

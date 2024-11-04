@@ -125,8 +125,16 @@ public readonly unsafe struct Shape : IEnumerable<int>
         return new(extents, strides);
     }
 
-    public int GetOffset(params ReadOnlySpan<Index> coords)
+    private static void EnsureCoordinateIsValid(ReadOnlySpan<LogicalCoord> coords, Shape shape)
     {
+        if (coords.Length != shape.Rank)
+            throw new InvalidOperationException($"Can not apply {coords.Length} rank coordinate to {shape.Rank} rank shape");
+    }
+    
+    public int GetOffset(params ReadOnlySpan<LogicalCoord> coords)
+    {
+        EnsureCoordinateIsValid(coords, this);
+        
         ReadOnlySpan<int> extents = Extents.AsSpan();
         ReadOnlySpan<int> strides = Strides.AsSpan();
         
@@ -136,13 +144,13 @@ public readonly unsafe struct Shape : IEnumerable<int>
         {
             var extent = extents[i];
             var stride = strides[i];
-            offset += coords[i].GetOffset(extent) * stride;
+            offset += coords[i].GetOffset(extent, stride);
         }
         
         return offset;
     }
 
-    public Shape Slice(ReadOnlySpan<RangeOrIndex> coords, out int offset)
+    public Shape Slice(ReadOnlySpan<LogicalRange> slice, out int offset)
     {
         ReadOnlySpan<int> originalExtents = Extents.AsSpan();
         ReadOnlySpan<int> originalStrides = Strides.AsSpan();
@@ -159,18 +167,16 @@ public readonly unsafe struct Shape : IEnumerable<int>
             var extent = originalExtents[i];
             var stride = originalStrides[i];
 
-            if (i < coords.Length)
+            if (i < slice.Length)
             {
-                var coord = coords[i];
-                var start = coord.Start.GetOffset(extent);
-                var end   = coord.End.GetOffset(extent);
+                var range = slice[i];
                 
-                offset += stride * start;     
+                offset += range.GetOffset(extent, stride);     
 
-                if (coord.IsIndex)
+                if (range.IsIndex)
                     continue;
                 
-                extents[rank] = end - start;
+                extents[rank] = range.GetSize(extent);
             }
             else
             {
