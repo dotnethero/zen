@@ -28,19 +28,6 @@ public static class ShapeExample
         PrintLayout(colMajor);
     }
 
-    public static void RunComposition()
-    {
-        var input1 = Shape.Create([20], [2]);
-        var shape1 = Shape.Create([5, 4]);
-
-        PrintLayout(input1.Compose(shape1)); // (5,4):(8,2)
-        
-        var input2 = Shape.Create(extents: [10, 2], strides: [16, 4]);
-        var shape2 = Shape.Create(extents: [5, 4],  strides: [1, 5]);
-
-        Console.WriteLine(input2.Compose(shape2)); // ((5,1),(2,2)):((16,4),(80,4))
-    }
-
     private static void PrintLayout(Shape shape, int offset = 0, [CallerArgumentExpression(nameof(shape))] string name = "")
     {
         var layout = new StringBuilder($"{name} has {shape} layout:\n");
