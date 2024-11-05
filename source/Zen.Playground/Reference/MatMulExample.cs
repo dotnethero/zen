@@ -7,7 +7,7 @@ public static class MatMulExample
 {
     public static void Run()
     {
-        var batchSize = 2;
+        var batchSize = 1;
         
         using var a = HostTensor.Allocate<float>([batchSize, 3, 4]);
         using var b = HostTensor.Allocate<float>([batchSize, 5, 4]); // b is allocated transposed

@@ -9,7 +9,6 @@ public static unsafe class ConvolutionExample
 {
     public static void Run()
     {
-        nuint size;
         zenConv2dHandle* plan;
         zenConv2dParams parameters = new zenConv2dParams
         {

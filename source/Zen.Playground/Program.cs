@@ -13,10 +13,9 @@ internal static class Program
         // EventExample.Run();
         // SliceExample.Run();
         // ConvolutionExample.Run();
+        GemmExample.Run();
 
         // BroadcastExample.Run();
-        
-        // MatMulExample.Run();
-        ConvolutionExample.Run();
+        MatMulExample.Run();
     }
 }

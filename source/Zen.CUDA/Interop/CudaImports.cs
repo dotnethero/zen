@@ -7,6 +7,16 @@ namespace Zen.CUDA.Interop;
 internal static unsafe class CudaImports
 {
     private const string LibraryName = "libzen.dll";
+
+    [DllImport(LibraryName, EntryPoint = "zenCreateGemm")]
+    public static extern void zenCreateGemm(
+        zenGemmHandle** handle,
+        int m,
+        int n,
+        int k,
+        float* a, int lda,
+        float* b, int ldb,
+        float* c, int ldc);
     
     [DllImport(LibraryName, EntryPoint = "zenCreateConv2d")]
     public static extern void zenCreateConv2d(
@@ -17,8 +27,14 @@ internal static unsafe class CudaImports
         float* bias,
         float* output);
 
+    [DllImport(LibraryName, EntryPoint = "zenExecuteGemm")]
+    public static extern void zenExecuteGemm(zenGemmHandle* handle, cudaStream* stream = null);
+    
     [DllImport(LibraryName, EntryPoint = "zenExecuteConv2d")]
     public static extern void zenExecuteConv2d(zenConv2dHandle* handle, cudaStream* stream = null);
+
+    [DllImport(LibraryName, EntryPoint = "zenDestroyGemm")]
+    public static extern void zenDestroyGemm(zenGemmHandle* handle);
     
     [DllImport(LibraryName, EntryPoint = "zenDestroyConv2d")]
     public static extern void zenDestroyConv2d(zenConv2dHandle* handle);

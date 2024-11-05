@@ -16,6 +16,9 @@ public sealed class DeviceTensor<T> : Tensor<T>, IDisposable where T : unmanaged
 {
     public readonly DeviceArray<T> Array;
 
+    public int Size => Shape.Size;
+    public int Cosize => Array.Size;
+
     public DeviceTensor(Shape shape, DeviceArray<T> array) : base(shape, array)
     {
         Array = array;

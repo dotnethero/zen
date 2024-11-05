@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(libcudalite CUDA CXX)
+project(libzen CUDA CXX)
 find_package(CUDAToolkit REQUIRED)
 
 set(CMAKE_CUDA_STANDARD 20)

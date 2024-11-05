@@ -12,6 +12,8 @@ public class Tensor<T> where T : unmanaged
     public readonly TensorRef<T> Reference;
     public readonly Shape Shape;
 
+    public unsafe T* Pointer => Reference.Pointer;
+
     public Tensor(Shape shape, TensorRef<T> reference)
     {
         Reference = reference;

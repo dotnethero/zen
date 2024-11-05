@@ -16,6 +16,9 @@ public sealed class HostTensor<T> : Tensor<T>, IDisposable where T : unmanaged
 {
     public readonly HostArray<T> Array;
 
+    public int Size => Shape.Size;
+    public int Cosize => Array.Size;
+
     public HostTensor(Shape shape, HostArray<T> array) : base(shape, array)
     {
         Array = array;
