@@ -6,25 +6,15 @@
 #include <cutlass/gemm/device/gemm_universal.h>
 
 using Element = float;
-using Layout = cutlass::layout::RowMajor;
-using Gemm = cutlass::gemm::device::Gemm<
+using Layout  = cutlass::layout::RowMajor;
+using Gemm    = cutlass::gemm::device::Gemm<
     Element, Layout,
     Element, Layout,
     Element, Layout>;
 
+using GemmHandle = zen::Handle<Gemm>;
+
 extern "C" {
-    
-    struct GemmHandle {
-        Gemm* gemm;
-        explicit GemmHandle(Gemm* gemm)
-        {
-            this->gemm = gemm;
-        }
-        void run(cudaStream_t stream) const
-        {
-            this->gemm->run(stream);
-        }
-    };
     
     DLL_EXPORT void zenCreateGemm(
         GemmHandle** handle,
