@@ -1,6 +1,7 @@
 ﻿using Zen.CUDA;
 using Zen.CUDA.Interop;
 using Zen.CUDA.Wrappers;
+using static Zen.CUDA.Interop.CudaImports;
 
 namespace Zen.Playground.Examples;
 
@@ -9,7 +10,7 @@ public static unsafe class ConvolutionExample
     public static void Run()
     {
         nuint size;
-        zenConv2dPlan* plan;
+        zenConv2dHandle* plan;
         zenConv2dParams parameters = new zenConv2dParams
         {
             input_n = 1,
@@ -77,21 +78,18 @@ public static unsafe class ConvolutionExample
         host_filter.CopyTo(filter, stream);
         stream.Synchronize();
 
-        LibZen.zenCreateConv2dPlan(&plan, &parameters);
-        LibZen.zenGetConv2dWorkspaceSize(plan, &size);
-
-        var ws = DeviceArray.Allocate<byte>((int)size);
-        
-        stream.BeginCapture();
-        LibZen.zenExecuteConv2d(
-            plan,
+        zenCreateConv2d(
+            &plan,
+            &parameters,
             input.Array.Pointer,
             filter.Array.Pointer,
             output.Array.Pointer,
-            1.0f,
-            1.0f,
-            output.Array.Pointer,
-            ws.Pointer,
+            output.Array.Pointer);
+        
+        stream.BeginCapture();
+        
+        zenExecuteConv2d(
+            plan,
             stream.Pointer);
 
         using var graph = stream.EndCapture();

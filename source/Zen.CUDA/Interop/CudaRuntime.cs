@@ -1,6 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 global using static Zen.CUDA.Interop.CudaRuntime;
+
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -10,7 +11,7 @@ namespace Zen.CUDA.Interop;
 
 internal static unsafe class CudaRuntime
 {
-    private const string LibraryName = "cudalite.dll";
+    private const string LibraryName = "libzen.dll";
 
     [DllImport(LibraryName, EntryPoint = "cudaDeviceReset")]
     public static extern cudaStatus cudaDeviceReset();
