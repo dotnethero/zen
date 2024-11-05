@@ -4,9 +4,9 @@ namespace Zen.CUDA.Wrappers;
 
 public sealed unsafe class CudaStream : IDisposable
 {
-    public static readonly CudaStream Default = new CudaStream(null);
-    
-    internal readonly cudaStream* Pointer;
+    public static readonly CudaStream Default = new(null);
+
+    public readonly cudaStream* Pointer;
 
     public CudaStream()
     {

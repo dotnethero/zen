@@ -4,7 +4,7 @@ namespace Zen.CUDA.Wrappers;
 
 public sealed unsafe class CudaGraph : IDisposable
 {
-    internal readonly cudaGraph* Pointer;
+    public readonly cudaGraph* Pointer;
 
     internal CudaGraph(cudaGraph* graph)
     {

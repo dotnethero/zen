@@ -4,7 +4,7 @@ namespace Zen.CUDA.Wrappers;
 
 public sealed unsafe class CudaEvent : IDisposable
 {
-    internal readonly cudaEvent* Pointer;
+    public readonly cudaEvent* Pointer;
 
     public CudaEvent()
     {

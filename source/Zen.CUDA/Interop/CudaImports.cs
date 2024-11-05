@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Zen.CUDA.Interop;
 
-internal static unsafe class CudaImports
+public static unsafe class CudaImports
 {
     private const string LibraryName = "libzen.dll";
 
@@ -41,13 +41,13 @@ internal static unsafe class CudaImports
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct zenGemmHandle;
+public struct zenGemmHandle;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct zenConv2dHandle;
+public struct zenConv2dHandle;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct zenConv2dParams
+public struct zenConv2dParams
 {
     public int input_n;
     public int input_h;

@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="Zen.Abstractions\Zen.Abstractions.csproj" Type="Classic C#" />
   <Project Path="Zen.CUDA\Zen.CUDA.csproj" Type="Classic C#" />
+  <Project Path="Zen.Inference\Zen.Inference.csproj" Type="Classic C#" />
   <Project Path="Zen.Playground\Zen.Playground.csproj" Type="Classic C#" />
 </Solution>

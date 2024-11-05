@@ -1,9 +1,12 @@
 ﻿using Zen.CUDA;
 using Zen.CUDA.Interop;
+using Zen.CUDA.Wrappers;
 using static Zen.CUDA.Interop.CudaRuntime;
 using static Zen.CUDA.Interop.CudaImports;
 
 namespace Zen.Playground.Examples;
+
+
 
 public static class GemmExample
 {

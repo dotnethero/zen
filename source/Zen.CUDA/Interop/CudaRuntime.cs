@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace Zen.CUDA.Interop;
 
-internal static unsafe class CudaRuntime
+public static unsafe class CudaRuntime
 {
     private const string LibraryName = "libzen.dll";
 
@@ -327,7 +327,7 @@ internal static unsafe class CudaRuntime
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe struct cudaPointerAttributes
+public unsafe struct cudaPointerAttributes
 {
     public cudaMemoryType type_;
     public int device;
@@ -336,20 +336,20 @@ internal unsafe struct cudaPointerAttributes
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct cudaMemLocation
+public struct cudaMemLocation
 {
     public cudaMemLocationType type_;
     public int id;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe struct cudaGuid
+public unsafe struct cudaGuid
 {
     public fixed byte bytes[16];
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe struct cudaDeviceProp
+public unsafe struct cudaDeviceProp
 {
     public fixed byte name[256];
     public cudaGuid uuid;
@@ -450,18 +450,18 @@ internal unsafe struct cudaDeviceProp
 }
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct cudaStream;
+public struct cudaStream;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct cudaEvent;
+public struct cudaEvent;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct cudaGraph;
+public struct cudaGraph;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct cudaGraphInstance;
+public struct cudaGraphInstance;
 
-internal enum cudaStatus
+public enum cudaStatus
 {
     cudaSuccess = 0,
     cudaErrorInvalidValue = 1,
@@ -594,7 +594,7 @@ internal enum cudaStatus
     cudaErrorApiFailureBase = 10000,
 }
 
-internal enum cudaMemoryType
+public enum cudaMemoryType
 {
     cudaMemoryTypeUnregistered = 0,
     cudaMemoryTypeHost = 1,
@@ -602,7 +602,7 @@ internal enum cudaMemoryType
     cudaMemoryTypeManaged = 3,
 }
 
-internal enum cudaMemcpyKind
+public enum cudaMemcpyKind
 {
     cudaMemcpyHostToHost = 0,
     cudaMemcpyHostToDevice = 1,
@@ -611,21 +611,21 @@ internal enum cudaMemcpyKind
     cudaMemcpyDefault = 4,
 }
 
-internal enum cudaStreamCaptureStatus
+public enum cudaStreamCaptureStatus
 {
     cudaStreamCaptureStatusNone = 0,
     cudaStreamCaptureStatusActive = 1,
     cudaStreamCaptureStatusInvalidated = 2,
 }
 
-internal enum cudaStreamCaptureMode
+public enum cudaStreamCaptureMode
 {
     cudaStreamCaptureModeGlobal = 0,
     cudaStreamCaptureModeThreadLocal = 1,
     cudaStreamCaptureModeRelaxed = 2,
 }
 
-internal enum cudaFuncCache
+public enum cudaFuncCache
 {
     cudaFuncCachePreferNone = 0,
     cudaFuncCachePreferShared = 1,
@@ -633,14 +633,14 @@ internal enum cudaFuncCache
     cudaFuncCachePreferEqual = 3,
 }
 
-internal enum cudaSharedMemConfig
+public enum cudaSharedMemConfig
 {
     cudaSharedMemBankSizeDefault = 0,
     cudaSharedMemBankSizeFourByte = 1,
     cudaSharedMemBankSizeEightByte = 2,
 }
 
-internal enum cudaLimit
+public enum cudaLimit
 {
     cudaLimitStackSize = 0,
     cudaLimitPrintfFifoSize = 1,
@@ -651,7 +651,7 @@ internal enum cudaLimit
     cudaLimitPersistingL2CacheSize = 6,
 }
 
-internal enum cudaMemoryAdvise
+public enum cudaMemoryAdvise
 {
     cudaMemAdviseSetReadMostly = 1,
     cudaMemAdviseUnsetReadMostly = 2,
@@ -661,7 +661,7 @@ internal enum cudaMemoryAdvise
     cudaMemAdviseUnsetAccessedBy = 6,
 }
 
-internal enum cudaMemRangeAttribute
+public enum cudaMemRangeAttribute
 {
     cudaMemRangeAttributeReadMostly = 1,
     cudaMemRangeAttributePreferredLocation = 2,
@@ -673,7 +673,7 @@ internal enum cudaMemRangeAttribute
     cudaMemRangeAttributeLastPrefetchLocationId = 8,
 }
 
-internal enum cudaDeviceAttr
+public enum cudaDeviceAttr
 {
     cudaDevAttrMaxThreadsPerBlock = 1,
     cudaDevAttrMaxBlockDimX = 2,
@@ -806,7 +806,7 @@ internal enum cudaDeviceAttr
     cudaDevAttrMax = 136,
 }
 
-internal enum cudaMemLocationType
+public enum cudaMemLocationType
 {
     cudaMemLocationTypeInvalid = 0,
     cudaMemLocationTypeDevice = 1,
@@ -815,7 +815,7 @@ internal enum cudaMemLocationType
     cudaMemLocationTypeHostNumaCurrent = 4,
 }
 
-internal enum cudaGraphMemAttributeType
+public enum cudaGraphMemAttributeType
 {
     cudaGraphMemAttrUsedMemCurrent = 0,
     cudaGraphMemAttrUsedMemHigh = 1,
@@ -823,7 +823,7 @@ internal enum cudaGraphMemAttributeType
     cudaGraphMemAttrReservedMemHigh = 3,
 }
 
-internal enum cudaDriverEntryPointQueryResult
+public enum cudaDriverEntryPointQueryResult
 {
     cudaDriverEntryPointSuccess = 0,
     cudaDriverEntryPointSymbolNotFound = 1,
