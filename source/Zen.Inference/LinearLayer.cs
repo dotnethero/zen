@@ -5,7 +5,7 @@ using static Zen.CUDA.Interop.CudaImports;
 
 namespace Zen.Inference;
 
-public unsafe class LinearLayer : IDisposable
+public unsafe class LinearLayer : IModel
 {
     internal zenGemmHandle* Handle;
 
