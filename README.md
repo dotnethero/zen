@@ -17,44 +17,6 @@ Zen offers low-level but ergonomic wrappers around CUDA functionality, making GP
 
 ## Examples
 
-### GEMM (General Matrix Multiplication)
-
-```csharp
-public static unsafe void RunGemm()
-{
-    using var a = ReferenceTensor.Allocate<float>([3, 4]);
-    using var b = ReferenceTensor.Allocate<float>([5, 4]);
-    using var c = ReferenceTensor.Allocate<float>([3, 5]);
-    
-    // Initialize tensors
-    for (var i = 0; i < a.Cosize; ++i)
-        a.Host.Array[i] = i + 1;
-    
-    for (var i = 0; i < b.Cosize; ++i)
-        b.Host.Array[i] = i % 3;
-    
-    a.SyncToDevice();
-    b.SyncToDevice();
-
-    // Create and execute GEMM operation
-    zenGemmHandle* handle;
-    zenCreateGemm(
-        &handle,
-        m: a.Shape.Extents[0],
-        n: b.Shape.Extents[0],
-        k: a.Shape.Extents[1],
-        a.Device.Pointer, lda: a.Shape.Strides[0],
-        b.Device.Pointer, ldb: b.Shape.Strides[0],
-        c.Device.Pointer, ldc: c.Shape.Strides[0]);
-    
-    zenExecuteGemm(handle);
-    cudaDeviceSynchronize();
-    
-    c.SyncToHost();
-    zenDestroyGemm(handle);
-}
-```
-
 ### CUDA Graph Capture and Replay
 
 ```csharp
